@@ -3,7 +3,7 @@
         <md-card>
             <md-card-title>
                 <md-card-title-text>
-                    <span layout="row" class="md-headline">{{name | capitalize}} Congress <span flex></span><small>0 {{symbol}} locked over 0 {{total_proposal}} proposals</small></span>
+                    <span layout="row" class="md-headline">Congress <span flex></span><small>0 {{symbol}} locked over 0 {{total_proposal}} proposals</small></span>
                 </md-card-title-text>
             </md-card-title>
             <md-card-content>
@@ -28,15 +28,11 @@
     
     <md-divider></md-divider>
     
-    <div>
-        <md-card>
-            <md-card-title>
-                <md-card-title-text>
-                    <p style="margin:0px;" layout="row"><b>Proposal#_ID_</b> &nbsp&nbsp Proposal Title<span flex></span><b>Passed</b></p>
-                </md-card-title-text>
-            </md-card-title>
-        </md-card>
-    </div>
+    <md-list>
+        <md-subheader class="md-no-sticky">
+            <span layout="row"><b>Proposal#_ID_</b> &nbsp&nbsp Proposal Title<span flex></span><b>Passed</b></span>
+        </md-subheader>
+    </md-list>
     
     <div>
         <md-card ng-click="goto('proposal/0001')" style="cursor: pointer; cursor: hand;">
