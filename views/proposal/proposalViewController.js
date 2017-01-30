@@ -27,7 +27,7 @@ function($scope,$http,Matriarch,MiniMeToken,Web3Service){
     });
     
     $scope.currentAccount = Web3Service.getCurrentAccount();
-    
+    /*
     $http({
       method: 'GET',
       url: 'http://gateway.ipfs.io/ipfs/QmYy4LAoXn2nALvu6UWpWoKoAJEQ967bKSUrVDTQ5XvvMF'
@@ -39,6 +39,6 @@ function($scope,$http,Matriarch,MiniMeToken,Web3Service){
         // called asynchronously if an error occurs
         // or server returns response with an error status.
         console.log(response);
-    });
+    });*/
     
 }]);
