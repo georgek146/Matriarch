@@ -1,0 +1,202 @@
+<md-content layout="column" layout-padding="5">
+    <div ng-hide="hidden">
+        <md-card>
+            <md-card-content>
+                <span layout="row">
+                    <h4 flex>Please make sure you have exposed the web3 object to your browser!</h4>
+                    <md-button ng-click="hide()">Hide</md-button>
+                </span>
+                <ul>
+                    <li><a href="https://metamask.io/">Metamask (recommended)</li></a>
+                    <li><a href="https://github.com/ethereum/mist/releases">Mist</li></a>
+                    <li><a href="https://github.com/ethereum/go-ethereum/wiki/Building-Ethereum">Geth</li></a>
+                    <li><a href="https://ethcore.io/parity.html">Parity</li></a>
+                </ul>
+            </md-card-content>
+        </md-card>
+    </div>
+
+    <div>
+        <md-card>
+            <md-card-title>
+                <md-card-title-text>
+                    <span layout="row" class="md-headline">{{name | capitalize}} <span flex></span><small>{{currentTokenSupply}}/{{maxTokenSupply}} {{symbol}}</small></span>
+                </md-card-title-text>
+            </md-card-title>
+            <md-card-content>
+                <span layout="row">Logged in as:<span flex></span><small>{{currentAccount}}</small></span>
+            </md-card-content>
+        </md-card>
+    </div>
+
+    <md-divider></md-divider>
+    
+    <md-list>
+        <md-subheader class="md-no-sticky">Information</md-subheader>
+        <md-list-item class="secondary-button-padding">
+            <p>CEO</p>
+            <p class="md-secondary">{{ceo}}</p>
+        </md-list-item>
+    </md-list>
+        
+    <md-divider></md-divider>
+
+    <div layout="row">
+        <md-card ng-if="maxTokenSupply > currentTokenSupply" flex>
+            <md-card-title>
+                <md-card-title-text>
+                    <span class="md-headline" layout="row"> Initial Coin Offering (ICO) </span>
+                </md-card-title-text>
+            </md-card-title>
+            <md-card-content layout="column">
+                <p>{{name | capitalize}} has a maximum supply of {{maxTokenSupply}} {{symbol}} and can be divided down to {{decimals}} decimal places. Users can choose to lock {{symbol | capitalize}} in return for the ability to vote on proposals. A voters weight is directly proportional to their {{symbol}} balance. <small><a href="#/home"> learn more </a></small></p>
+                <span layout layout-align="center" flex><small>1 ether = 1 arc</small></span>
+                <span layout="row">
+                    <md-input-container class="skinny-container" flex>
+                        <label>Amount</label>
+                        <input ng-model="actions.buy.ico">
+                    </md-input-container>
+                    <p layout="column">
+                        <span flex></span>
+                        &nbsp{{symbol}}
+                    </p>   
+                </span>
+                <span layout="row">
+                    <md-button flex ng-click="actions.buy.ico = actions.buy.max">max</md-button>
+                    <md-button flex ng-click="buyICOTokens(actions.buy.ico)">Buy</md-button>
+                </span>
+            </md-card-content>
+        </md-card>
+        <md-card flex>
+            <md-card-title>
+                <md-card-title-text>
+                    <span class="md-headline">Transfer {{symbol | capitalize}}</span>
+                </md-card-title-text>
+            </md-card-title>
+            <md-card-content layout="column">
+                <md-input-container class="skinny-container">
+                    <label>To</label>
+                    <input type="text" placeholder="0x1a4k..." ng-model="actions.transfer.to">
+                </md-input-container>
+                <span layout="row">
+                    <md-input-container class="skinny-container" flex>
+                        <label>Amount</label>
+                        <input ng-model="actions.transfer.amount">
+                    </md-input-container>
+                    <p layout="column">
+                        <span flex></span>
+                        {{symbol}}
+                    </p>
+                </span>
+                <span layout="row">
+                    <md-button flex ng-click="actions.transfer.amount = actions.sell.max">max</md-button>
+                    <md-button flex ng-click="transfer(actions.transfer.to, actions.transfer.amount)" ng-disabled="{{transfersAllowed}}">Transfer</md-button>
+                </span>
+            </md-card-content>
+        </md-card>
+    </div>
+    <div layout="row">
+        <md-card flex>
+            <md-card-title>
+                <md-card-title-text>
+                    <span class="md-headline">Demo Buy {{symbol | capitalize}} <span flex></span><small>(soon via EtherDelta?)</small></span>
+                </md-card-title-text>
+            </md-card-title>
+            <md-card-content layout="column">
+                <span layout="row">
+                    <md-input-container class="skinny-container" flex>
+                        <label>Amount</label>
+                        <input ng-model="actions.buy.token">
+                    </md-input-container>
+                    <p layout="column">
+                        <span flex></span>
+                        eth
+                    </p>
+                </span>
+                <span layout="row">
+                    <span flex></span>
+                    <span>
+                        <small>
+                            The best buy price available is (2.00 arc/eth) with 
+                            <span style="color:blue" ng-click="actions.buy.token = 1"> 1 Ether </span> 
+                            worth available
+                        </small>
+                    </span>
+                </span>
+                <span ng-show="actions.buy.token > 0" layout="row">
+                    <span flex></span>
+                    <span>
+                        <small>
+                            {{actions.buy.token}} ether will buy a total of 
+                            <span ng-show="actions.buy.token <= 1">
+                                {{actions.buy.token * 2}} {{symbol}}
+                                (2 arc/eth)
+                            </span>
+                            <span ng-show="actions.buy.token > 1">
+                                {{(actions.buy.token*1 + 1)}} {{symbol}}
+                                ({{ (action.buy.token + 1)/actions.buy.token + 1}} arc/eth)
+                            </span>
+                        </small>
+                    </span>
+                </span>
+                <span layout="row">
+                    <md-button flex ng-click="actions.buy.token = actions.buy.max">max</md-button>
+                    <md-button flex ng-disabled="true">Buy</md-button>
+                </span>
+            </md-card-content>
+        </md-card>
+        <md-card flex>
+            <md-card-title>
+                <md-card-title-text>
+                    <span class="md-headline">Demo Sell {{symbol | capitalize}} <span flex></span><small>(soon via EtherDelta?)</small></span>
+                </md-card-title-text>
+            </md-card-title>
+            <md-card-content layout="column">
+                <span layout="row">
+                    <md-input-container class="skinny-container" flex>
+                        <label>Amount</label>
+                        <input ng-model="actions.sell.token">
+                    </md-input-container>
+                    <p layout="column">
+                        <span flex></span>
+                        {{symbol}}
+                    </p>
+                </span>
+                <span layout="row">
+                    <span flex></span>
+                    <span>
+                        <small>
+                            The best sell price available is (1.95 arc/eth) with 
+                            <span style="color:blue" ng-click="actions.sell.token = 0.25"> 0.25 Ether </span> 
+                            worth available
+                        </small>
+                    </span>
+                </span>
+                <span ng-show="actions.sell.token > 0" layout="row">
+                    <span flex></span>
+                    <span>
+                        <small>
+                            <span ng-show="actions.sell.token <= 0.25">
+                            {{actions.sell.token}} ether will sell for a total of 
+                                {{actions.sell.token / 1.95}} {{symbol}}
+                                (1.95 arc/eth)
+                            </span>
+                            <span style="color:red" ng-show="actions.sell.token > 0.25">
+                                *Unfortunately there are not enough buyers to sell {{actions.sell.token}} {{symbol}}!
+                            </span>
+                        </small>
+                    </span>
+                </span>
+                <span layout="row">
+                    <md-button flex ng-click="actions.sell.token = actions.sell.max">max</md-button>
+                    <md-button flex ng-disabled="true">Sell</md-button>
+                </span>
+            </md-card-content>
+        </md-card>
+    </div>
+</md-content>
+<div style="padding:10px;" layout layout-align="center center">
+    <a href="#home">
+        <h5 style="margin:0px;">Matriarch created by ChicoBitcoinJoe</h5>
+    </a>
+</div>

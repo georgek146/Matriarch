@@ -1,0 +1,12 @@
+<md-toolbar class="toolbar" layout="row">
+    <md-content class="md-padding" flex>
+        <md-nav-bar md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links">
+            <md-nav-item md-nav-click="goto('home')" name="home" ng-disabled="true">Matriarch</md-nav-item>
+            <md-button ng-disabled="true"> {{etherBalance.toFixed(2)}} ether</md-button>
+            <md-button ng-disabled="true"> {{tokenBalance.toFixed(2)}} {{symbol}}</md-button>
+            <span flex></span>
+            <md-nav-item md-nav-click="goto('proposals')" name="proposals">Proposals</md-nav-item>
+            <md-nav-item md-nav-click="goto('votes')" name="votes">My Votes</md-nav-item>
+        </md-nav-bar>
+    </md-content>
+</md-toolbar>

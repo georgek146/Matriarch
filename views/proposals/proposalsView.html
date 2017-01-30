@@ -1,0 +1,64 @@
+<md-content layout="column" layout-padding="5" flex>
+    <div>
+        <md-card layout="row">
+            <md-card-title>
+                <md-card-title-text>
+                    <span layout="row" class="md-headline">{{name | capitalize}} Congress <span flex></span><small>0 {{symbol}} locked over 0 {{total_proposal}} proposals</small></span>
+                </md-card-title-text>
+            </md-card-title>
+        </md-card>
+    </div>
+
+    <md-divider></md-divider>
+    
+    <md-list>
+        <md-subheader class="md-no-sticky">Congress Details</md-subheader>
+        <md-list-item class="secondary-button-padding">
+            <p>Curator</p>
+            <p class="md-secondary">{{curator}}</p>
+        </md-list-item>
+        <md-list-item class="secondary-button-padding">
+            <p>Majority Percent</p>
+            <p class="md-secondary">{{majorityPercent}}</p>
+        </md-list-item>
+    </md-list>
+        
+    <md-divider></md-divider>
+    
+    <div>
+        <md-card>
+            <md-card-title>
+                <md-card-title-text>
+                    <span class="md-headline">Proposals</span>
+                </md-card-title-text>
+            </md-card-title>
+            <md-card-content>
+                <md-list>
+                    <md-list-item ng-click="doPrimaryAction($event)" layout="row">
+                        <span>Proposal#0001 &nbsp</span>
+                        <md-slider-container style="min-height:90px !important; margin-top:20px !important;" flex>
+                            <md-slider ng-model="proposal1Percent" aria-label="Proposal 1 Percent Support" flex md-discrete ng-readonly="true" ng-disabled="true"></md-slider>
+                        </md-slider-container>
+                    </md-list-item>
+                    <md-list-item ng-click="doPrimaryAction($event)" layout="row">
+                        <span>Proposal#0002 &nbsp</span>
+                        <md-slider-container style="min-height:90px !important; margin-top:20px !important;" flex>
+                            <md-slider ng-model="proposal2Percent" aria-label="Proposal 2 Percent Support" flex md-discrete ng-readonly="true" ng-disabled="true"></md-slider>
+                        </md-slider-container>
+                    </md-list-item>
+                    <md-list-item ng-click="doPrimaryAction($event)" layout="row">
+                        <span>Proposal#0003 &nbsp</span>
+                        <md-slider-container style="min-height:90px !important; margin-top:20px !important;" flex>
+                            <md-slider ng-model="proposal3Percent" aria-label="Proposal 3 Percent Support" flex md-discrete ng-readonly="true" ng-disabled="true"></md-slider>
+                        </md-slider-container>
+                    </md-list-item>
+                </md-list>
+            </md-card-content>
+        </md-card>
+    </div>
+</md-content>
+<div style="padding:10px;" layout layout-align="center center">
+    <a href="#home">
+        <h5 style="margin:0px;">Matriarch created by ChicoBitcoinJoe</h5>
+    </a>
+</div>

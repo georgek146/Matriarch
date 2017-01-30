@@ -1,0 +1,61 @@
+<html lang="en" >
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="This is a description of something...">
+    
+    <!-- Angular Material style sheet -->
+    <link rel="stylesheet" href="angular-includes/angular-material-1.1.0.min.css">
+    <link rel="stylesheet" href="libs/googleapis-fonts/material-icons.css">
+    <link rel="stylesheet" href="libs/googleapis-fonts/roboto.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="views/home/homeView.css">
+    <link rel="stylesheet" href="directives/toolbar/toolbarDirective.css">
+    
+    <!-- Angular (included early for ng-cloak) -->
+    <script src="angular-includes/angular-1.5.5.min.js"></script>
+    
+    <title>Matriarch - Testnet</title>
+    
+</head>
+<body ng-app="Matriarch" layout="column" layout-fill ng-cloak>
+    
+    <toolbar></toolbar>
+    <md-content flex>
+        <div ng-view></div>
+    </md-content>
+
+    <!-- Angular + Material Libraries -->
+    <script src="angular-includes/angular-animate-1.5.5.min.js"></script>
+    <script src="angular-includes/angular-aria-1.5.5.min.js"></script>
+    <script src="angular-includes/angular-material-1.1.0.min.js"></script>
+    <script src="angular-includes/angular-messages-1.5.5.min.js"></script>
+    <script src="angular-includes/angular-route-1.5.5.min.js"></script>
+    <script src="angular-includes/angular-svg-assets-cache.js"></script>
+    <script src="angular-includes/angular-sanitize-1.6.2.js"></script>
+    
+    <!-- Other Libraries -->
+    <script src="libs/marked.js"></script>
+    <script src="libs/web3.js"></script>
+            
+    <!-- Application Files  -->
+    <script src="app.js"></script>
+    
+    <!-- Services -->
+    <script src="services/Web3Service.js"></script>
+    <script src="services/MiniMeToken.js"></script>
+    <script src="services/Matriarch.js"></script>
+
+    
+    <!-- Controllers -->
+    <script src="views/home/homeViewController.js"></script>
+    <script src="views/proposals/proposalsViewController.js"></script>
+    <script src="views/votes/votesViewController.js"></script>
+
+    
+    <!-- Directives -->
+    <script src="directives/toolbar/toolbarDirective.js"></script>
+            
+</body>
+</html>
