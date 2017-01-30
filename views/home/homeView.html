@@ -1,21 +1,4 @@
-<md-content layout="column" layout-padding="5">
-    <div ng-hide="hidden">
-        <md-card>
-            <md-card-content>
-                <span layout="row">
-                    <h4 flex>Please make sure you have exposed the web3 object to your browser!</h4>
-                    <md-button ng-click="hide()">Hide</md-button>
-                </span>
-                <ul>
-                    <li><a href="https://metamask.io/">Metamask (recommended)</li></a>
-                    <li><a href="https://github.com/ethereum/mist/releases">Mist</li></a>
-                    <li><a href="https://github.com/ethereum/go-ethereum/wiki/Building-Ethereum">Geth</li></a>
-                    <li><a href="https://ethcore.io/parity.html">Parity</li></a>
-                </ul>
-            </md-card-content>
-        </md-card>
-    </div>
-
+<md-content layout="column">
     <div>
         <md-card>
             <md-card-title>
@@ -32,10 +15,22 @@
     <md-divider></md-divider>
     
     <md-list>
-        <md-subheader class="md-no-sticky">Information</md-subheader>
+        <md-subheader class="md-no-sticky">{{name | capitalize}} Details</md-subheader>
         <md-list-item class="secondary-button-padding">
-            <p>CEO</p>
+            <p>ceo</p>
             <p class="md-secondary">{{ceo}}</p>
+        </md-list-item>
+        <md-list-item class="secondary-button-padding">
+            <p>beneficiary</p>
+            <p class="md-secondary">{{beneficiary}}</p>
+        </md-list-item>
+        <md-list-item class="secondary-button-padding">
+            <p>vault</p>
+            <p class="md-secondary">{{vault}}</p>
+        </md-list-item>
+        <md-list-item class="secondary-button-padding">
+            <p>curator</p>
+            <p class="md-secondary">{{curator}}</p>
         </md-list-item>
     </md-list>
         
@@ -49,7 +44,7 @@
                 </md-card-title-text>
             </md-card-title>
             <md-card-content layout="column">
-                <p>{{name | capitalize}} has a maximum supply of {{maxTokenSupply}} {{symbol}} and can be divided down to {{decimals}} decimal places. Users can choose to lock {{symbol | capitalize}} in return for the ability to vote on proposals. A voters weight is directly proportional to their {{symbol}} balance. <small><a href="#/home"> learn more </a></small></p>
+                <p>{{name | capitalize}} has a maximum supply of {{maxTokenSupply}} {{symbol}} and can be divided down to {{decimals}} decimal places. Users can choose to lock {{symbol}} in return for the ability to vote on proposals. A voters weight is directly proportional to their {{symbol}} balance. <small><a href="https://github.com/ChicoBitcoinJoe/Matriarch"> learn more </a></small></p>
                 <span layout layout-align="center" flex><small>1 ether = 1 arc</small></span>
                 <span layout="row">
                     <md-input-container class="skinny-container" flex>
@@ -67,6 +62,7 @@
                 </span>
             </md-card-content>
         </md-card>
+        
         <md-card flex>
             <md-card-title>
                 <md-card-title-text>
@@ -95,7 +91,7 @@
             </md-card-content>
         </md-card>
     </div>
-    <div layout="row">
+    <div id="trade" layout="row">
         <md-card flex>
             <md-card-title>
                 <md-card-title-text>
@@ -118,7 +114,7 @@
                     <span>
                         <small>
                             The best buy price available is (2.00 arc/eth) with 
-                            <span style="color:blue" ng-click="actions.buy.token = 1"> 1 Ether </span> 
+                            <span style="color:blue; cursor: pointer; cursor: hand;" ng-click="actions.buy.token = 1"> 1 Ether </span> 
                             worth available
                         </small>
                     </span>
@@ -167,7 +163,7 @@
                     <span>
                         <small>
                             The best sell price available is (1.95 arc/eth) with 
-                            <span style="color:blue" ng-click="actions.sell.token = 0.25"> 0.25 Ether </span> 
+                            <span style="color:blue; cursor: pointer; cursor: hand;" ng-click="actions.sell.token = 0.25"> 0.25 Ether </span> 
                             worth available
                         </small>
                     </span>
@@ -196,7 +192,7 @@
     </div>
 </md-content>
 <div style="padding:10px;" layout layout-align="center center">
-    <a href="#home">
+    <a href="https://github.com/ChicoBitcoinJoe/Matriarch">
         <h5 style="margin:0px;">Matriarch created by ChicoBitcoinJoe</h5>
     </a>
 </div>

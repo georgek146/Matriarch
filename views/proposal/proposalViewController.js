@@ -1,6 +1,6 @@
-Matriarch.controller('ProposalsViewController', ['$scope','Matriarch','MiniMeToken','Web3Service',
-function($scope,Matriarch,MiniMeToken,Web3Service){
-    console.log('Loading Proposals View');
+Matriarch.controller('ProposalViewController', ['$scope','$http','Matriarch','MiniMeToken','Web3Service',
+function($scope,$http,Matriarch,MiniMeToken,Web3Service){
+    console.log('Loading Proposal View');
     
     Matriarch.getCurator().then(
     function(curator){
@@ -25,4 +25,20 @@ function($scope,Matriarch,MiniMeToken,Web3Service){
     }).catch( function(err){
         console.error(err);
     });
+    
+    $scope.currentAccount = Web3Service.getCurrentAccount();
+    
+    $http({
+      method: 'GET',
+      url: 'http://gateway.ipfs.io/ipfs/QmYy4LAoXn2nALvu6UWpWoKoAJEQ967bKSUrVDTQ5XvvMF'
+    }).then(function successCallback(response) {
+        // this callback will be called asynchronously
+        // when the response is available
+        console.log(response);
+    }, function errorCallback(response) {
+        // called asynchronously if an error occurs
+        // or server returns response with an error status.
+        console.log(response);
+    });
+    
 }]);

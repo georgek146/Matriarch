@@ -11,12 +11,24 @@ function($location, Web3Service, MiniMeToken) {
             console.log('Loading toolbar');
             
             $scope.goto = function(url) {
+                if($scope.id)
+                    $scope.id= null;
+                
                 $location.url(url);
             };
             
             $scope.currentNavItem = $location.url().slice(1);
+            $scope.urlArray = $scope.currentNavItem.split('/');
+            $scope.id = $scope.urlArray[1];
             
+            $scope.$on('$routeChangeStart', function(next, current) { 
+                $scope.currentNavItem = $location.url().slice(1);
+                $scope.urlArray = $scope.currentNavItem.split('/');
+                $scope.id = $scope.urlArray[1];
+             });
+                        
             setInterval(function(){
+                
                 MiniMeToken.getCurrentTokenSupply().then(
                 function(supply){
                     $scope.currentTokenSupply = supply;

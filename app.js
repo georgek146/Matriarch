@@ -6,15 +6,15 @@ Matriarch.config(function ($routeProvider) {
         templateUrl: 'views/home/homeView.html',
         controller: 'HomeViewController'
     }).
+    when('/congress', {
+        templateUrl: 'views/congress/congressView.html',
+        controller: 'CongressViewController'
+    }).
     when('/votes', {
         templateUrl: 'views/votes/votesView.html',
         controller: 'VotesViewController'
     }).
-    when('/proposals', {
-        templateUrl: 'views/proposals/proposalsView.html',
-        controller: 'ProposalsViewController'
-    }).
-    when('/proposals/:id', {
+    when('/proposal/:id', {
         templateUrl: 'views/proposal/proposalView.html',
         controller: 'ProposalViewController'
     }).

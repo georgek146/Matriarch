@@ -1,5 +1,5 @@
-Matriarch.controller('VotesViewController', ['$scope','MiniMeToken','Web3Service',
-function($scope,MiniMeToken,Web3Service){
+Matriarch.controller('VotesViewController', ['$scope','$location','MiniMeToken','Web3Service',
+function($scope,$location,MiniMeToken,Web3Service){
     console.log('Loading Votes View');
     
     MiniMeToken.getSymbol(Web3Service.getCurrentAccount())
@@ -18,4 +18,11 @@ function($scope,MiniMeToken,Web3Service){
     
     $scope.currentAccount = Web3Service.getCurrentAccount();
     
+    $scope.proposal1Percent = 70;
+    $scope.proposal2Percent = 55;
+    $scope.proposal3Percent = 23;
+    
+    $scope.goto = function(url) {
+        $location.url(url);
+    };
 }]);

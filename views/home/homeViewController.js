@@ -1,5 +1,5 @@
-Matriarch.controller('HomeViewController', ['$scope','Web3Service','Matriarch','MiniMeToken','$http',
-function($scope, Web3Service, Matriarch, MiniMeToken, $http){
+Matriarch.controller('HomeViewController', ['$scope','Web3Service','Matriarch','MiniMeToken',
+function($scope, Web3Service, Matriarch, MiniMeToken){
     console.log('Loading Home View');
     
     $scope.hidden = localStorage.getItem('hide-home-view-notification');
@@ -9,22 +9,24 @@ function($scope, Web3Service, Matriarch, MiniMeToken, $http){
         localStorage.setItem('hide-home-view-notification', $scope.hidden);
     };
     
-    $http({
-      method: 'GET',
-      url: 'http://gateway.ipfs.io/ipfs/QmYy4LAoXn2nALvu6UWpWoKoAJEQ967bKSUrVDTQ5XvvMF'
-    }).then(function successCallback(response) {
-        // this callback will be called asynchronously
-        // when the response is available
-        console.log(response);
-    }, function errorCallback(response) {
-        // called asynchronously if an error occurs
-        // or server returns response with an error status.
-        console.log(response);
-    });
-    
     Matriarch.getCEO().then(
     function(ceo){
         $scope.ceo = ceo;
+    });
+    
+    Matriarch.getBeneficiary().then(
+    function(beneficiary){
+        $scope.beneficiary = beneficiary;
+    });
+    
+    Matriarch.getVault().then(
+    function(vault){
+        $scope.vault = vault;
+    });
+    
+    Matriarch.getCurator().then(
+    function(curator){
+        $scope.curator = curator;
     });
     
     Matriarch.getMaxTokenSupply().then(

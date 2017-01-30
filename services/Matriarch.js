@@ -21,6 +21,26 @@ function ($q, Web3Service, MiniMeToken) {
             });
             return deferred.promise;
         },
+        getBeneficiary: function(){
+            var deferred = $q.defer();
+            Matriarch.beneficiary(function(err,beneficiary){
+                if(!err)
+                    deferred.resolve(beneficiary);
+                else
+                    deferred.reject(err);
+            });
+            return deferred.promise;
+        },
+        getVault: function(){
+            var deferred = $q.defer();
+            Matriarch.vault(function(err,vault){
+                if(!err)
+                    deferred.resolve(vault);
+                else
+                    deferred.reject(err);
+            });
+            return deferred.promise;
+        },
         getCurator: function(){
             var deferred = $q.defer();
             Matriarch.curator(function(err,curator){

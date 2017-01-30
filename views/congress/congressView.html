@@ -3,7 +3,7 @@
         <md-card>
             <md-card-title>
                 <md-card-title-text>
-                    <span layout="row" class="md-headline">My Votes <span flex></span><small>0 {{symbol}} locked over 0 {{my_votes}} votes</small></span>
+                    <span layout="row" class="md-headline">{{name | capitalize}} Congress <span flex></span><small>0 {{symbol}} locked over 0 {{total_proposal}} proposals</small></span>
                 </md-card-title-text>
             </md-card-title>
             <md-card-content>
@@ -11,28 +11,45 @@
             </md-card-content>
         </md-card>
     </div>
-        
+    
     <md-divider></md-divider>
     
     <md-list>
-        <md-subheader class="md-no-sticky">*Tip: your votes are in <b>bold</b></md-subheader>
+        <md-subheader class="md-no-sticky">Congress Details</md-subheader>
+        <md-list-item class="secondary-button-padding">
+            <p>Curator</p>
+            <p class="md-secondary">{{curator}}</p>
+        </md-list-item>
+        <md-list-item class="secondary-button-padding">
+            <p>Majority Percent</p>
+            <p class="md-secondary">{{majorityPercent}}</p>
+        </md-list-item>
     </md-list>
-        
+    
     <md-divider></md-divider>
-
+    
     <div>
-        <md-card ng-click="goto('proposal/0001')"  style="cursor: pointer; cursor: hand;">
+        <md-card>
+            <md-card-title>
+                <md-card-title-text>
+                    <p style="margin:0px;" layout="row"><b>Proposal#_ID_</b> &nbsp&nbsp Proposal Title<span flex></span><b>Passed</b></p>
+                </md-card-title-text>
+            </md-card-title>
+        </md-card>
+    </div>
+    
+    <div>
+        <md-card ng-click="goto('proposal/0001')" style="cursor: pointer; cursor: hand;">
             <md-card-title>
                 <md-card-title-text>
                     <span><b>Proposal#0001</b> &nbsp A Proposal To Set A New Matriarch Controller To Enable New Features</span>
                 </md-card-title-text>
             </md-card-title>
             <md-card-content style="padding-bottom:0px !important;" layout="row">
-                <b>yes</b>
                 <md-slider-container flex>
                     <md-slider ng-model="proposal1Percent" aria-label="Proposal 1 Percent Support" flex md-discrete ng-readonly="true" ng-disabled="true"></md-slider>
                 </md-slider-container>
-                no
+                &nbsp<b>yes</b>
             </md-card-content>
         </md-card>
         <md-card ng-click="goto('proposal/0002')"  style="cursor: pointer; cursor: hand;">
@@ -42,25 +59,23 @@
                 </md-card-title-text>
             </md-card-title>
             <md-card-content style="padding-bottom:0px !important;" layout="row">
-                yes
                 <md-slider-container flex>
                     <md-slider ng-model="proposal2Percent" aria-label="Proposal 2 Percent Support" flex md-discrete ng-readonly="true" ng-disabled="true"></md-slider>
                 </md-slider-container>
-                <b>no</b>
+                &nbsp<b>yes</b>
             </md-card-content>
         </md-card>
-        <md-card ng-click="goto('proposal/0003')" style="cursor: pointer; cursor: hand;">
+        <md-card ng-click="goto('proposal/0003')"  style="cursor: pointer; cursor: hand;">
             <md-card-title>
                 <md-card-title-text>
                     <span><b>Proposal#0003</b> &nbsp A Proposal To Increase The Max Token Supply By 1000 Arc To Fund A Project</span>
                 </md-card-title-text>
             </md-card-title>
             <md-card-content style="padding-bottom:0px !important;" layout="row">
-                yes
                 <md-slider-container flex>
                     <md-slider ng-model="proposal3Percent" aria-label="Proposal 3 Percent Support" flex md-discrete ng-readonly="true" ng-disabled="true"></md-slider>
                 </md-slider-container>
-                <b>no</b>
+                &nbspno
             </md-card-content>
         </md-card>
     </div>
