@@ -9,4 +9,4 @@ Matriarch is my implementation of a DAO layer on top of an erc-20 compliant toke
     - [Metamask - chrome extension](https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn) (recommended)
     - [Mist - web3 compatible browser](https://github.com/ethereum/mist/releases) (medium)
     - [Geth - locally hosted web3 client](https://github.com/ethereum/go-ethereum/wiki/Building-Ethereum) (hard)
-2. Go to [available soon]()
+2. Go to the [Matriarch testnet webpage](http://matriarch-testnet.azurewebsites.net/)
