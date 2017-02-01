@@ -12,13 +12,10 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="views/home/homeView.css">
     
-    <!-- Angular (included early for ng-cloak) -->
-    <script src="angular-includes/angular-1.5.5.min.js"></script>
-    
     <title>Matriarch - Testnet</title>
     
 </head>
-<body ng-app="Matriarch" layout="column" layout-fill ng-cloak>
+<body ng-app="Matriarch" layout="column" layout-fill>
     
     <toolbar></toolbar>
     <md-content flex>
@@ -26,6 +23,7 @@
     </md-content>
 
     <!-- Angular + Material Libraries -->
+    <script src="angular-includes/angular-1.5.5.min.js"></script>
     <script src="angular-includes/angular-animate-1.5.5.min.js"></script>
     <script src="angular-includes/angular-aria-1.5.5.min.js"></script>
     <script src="angular-includes/angular-material-1.1.0.min.js"></script>
@@ -45,6 +43,7 @@
     <script src="services/Web3Service.js"></script>
     <script src="services/MiniMeToken.js"></script>
     <script src="services/Matriarch.js"></script>
+    <script src="services/Congress.js"></script>
 
     
     <!-- Controllers -->
@@ -52,6 +51,7 @@
     <script src="views/congress/congressViewController.js"></script>
     <script src="views/proposal/proposalViewController.js"></script>
     <script src="views/votes/votesViewController.js"></script>
+    <script src="views/myproposals/myProposalsViewController.js"></script>
 
     
     <!-- Directives -->

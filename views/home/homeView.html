@@ -4,7 +4,7 @@
         <md-card>
             <md-card-title>
                 <md-card-title-text>
-                    <span layout="row" class="md-headline">{{name | capitalize}} <span flex></span><small>{{currentTokenSupply}}/{{maxTokenSupply}} {{symbol}}</small></span>
+                    <span layout="row" class="md-headline">{{name | capitalize}} Token<span flex></span><small>{{currentTokenSupply}}/{{maxTokenSupply}} {{symbol}}</small></span>
                 </md-card-title-text>
             </md-card-title>
             <md-card-content>
@@ -20,10 +20,6 @@
         <md-list-item class="secondary-button-padding">
             <p>ceo</p>
             <p class="md-secondary">{{ceo}}</p>
-        </md-list-item>
-        <md-list-item class="secondary-button-padding">
-            <p>beneficiary</p>
-            <p class="md-secondary">{{beneficiary}}</p>
         </md-list-item>
         <md-list-item class="secondary-button-padding">
             <p>vault</p>
@@ -115,8 +111,8 @@
                     <span>
                         <small>
                             The best buy price available is (2.00 arc/eth) with 
-                            <span style="color:blue; cursor: pointer; cursor: hand;" ng-click="actions.buy.token = 1"> 1 Ether </span> 
-                            worth available
+                            <span style="color:blue; cursor: pointer; cursor: hand;" ng-click="actions.buy.token = 1"> 1 {{symbol}} </span> 
+                            available
                         </small>
                     </span>
                 </span>
@@ -156,7 +152,7 @@
                     </md-input-container>
                     <p layout="column">
                         <span flex></span>
-                        {{symbol}}
+                        Ether
                     </p>
                 </span>
                 <span layout="row">
@@ -174,8 +170,8 @@
                     <span>
                         <small>
                             <span ng-show="actions.sell.token <= 0.25">
-                            {{actions.sell.token}} ether will sell for a total of 
-                                {{actions.sell.token / 1.95}} {{symbol}}
+                            {{actions.sell.token}} {{symbol}} will sell for a total of 
+                                {{actions.sell.token / 1.95}} ether
                                 (1.95 arc/eth)
                             </span>
                             <span style="color:red" ng-show="actions.sell.token > 0.25">

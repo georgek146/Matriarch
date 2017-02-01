@@ -14,11 +14,6 @@ function($scope, Web3Service, Matriarch, MiniMeToken){
         $scope.ceo = ceo;
     });
     
-    Matriarch.getBeneficiary().then(
-    function(beneficiary){
-        $scope.beneficiary = beneficiary;
-    });
-    
     Matriarch.getVault().then(
     function(vault){
         $scope.vault = vault;
