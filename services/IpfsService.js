@@ -1,4 +1,5 @@
-Community.service( 'IpfsService',['$q','$sce', function ($q,$sce) {
+Matriarch.service( 'IpfsService',['$q', 
+function ($q) {
     console.log('Loading IpfsService');
 	ipfs.setProvider();
     
@@ -6,14 +7,17 @@ Community.service( 'IpfsService',['$q','$sce', function ($q,$sce) {
 		getIpfsData: function (ipfsHash) {
             var deferred = $q.defer();
             
-            var local = localStorage.getItem(ipfsHash);
+            var local = false;//localStorage.getItem(ipfsHash);
             if(!local){
                 //console.log("fetching data from ipfs for", ipfsHash);
-                var post = ipfs.catJson($sce.trustAsResourceUrl(ipfsHash), function(err, ipfsData) {
+                var post = ipfs.catJson(ipfsHash, function(err, ipfsData) {
                     if(err || !ipfsData){
                         deferred.reject(err);
                     } else {
                         localStorage.setItem(ipfsHash,JSON.stringify(ipfsData));
+                        console.log(ipfsData);
+                        var obj = JSON.parse(ipfsData);
+                        console.log(ipfsData);
                         deferred.resolve(ipfsData);
                     }
                 });
@@ -40,6 +44,20 @@ Community.service( 'IpfsService',['$q','$sce', function ($q,$sce) {
             return deferred.promise;
 		}
 	};
+    /*$http({
+      method: 'GET',
+      url: 'http://gateway.ipfs.io/ipfs/QmYy4LAoXn2nALvu6UWpWoKoAJEQ967bKSUrVDTQ5XvvMF'
+    }).then(function successCallback(response) {
+        // this callback will be called asynchronously
+        // when the response is available
+        console.log(response);
+        $scope.markdown = response.data;
+        
+    }, function errorCallback(response) {
+        // called asynchronously if an error occurs
+        // or server returns response with an error status.
+        console.log(response);
+    });*/
 
 	return service;
 }]);

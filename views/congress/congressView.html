@@ -3,7 +3,7 @@
         <md-card>
             <md-card-title>
                 <md-card-title-text>
-                    <span layout="row" class="md-headline">Proposals Demo <span flex></span><small>0 {{symbol}} locked over 0 {{total_proposal}} proposals</small></span>
+                    <span layout="row" class="md-headline">Proposals Demo <span flex></span><small>{{totalLocked}} {{symbol}} locked over {{total_proposals}} proposals</small></span>
                 </md-card-title-text>
             </md-card-title>
             <md-card-content>
@@ -30,51 +30,25 @@
     
     <md-list>
         <md-subheader class="md-no-sticky">
-            <span layout="row"><b>Proposal#_ID_</b> &nbsp&nbsp Proposal Title<span flex></span><b>Passed</b></span>
+            <span layout="row"><b>Proposal#_ID_</b> &nbsp&nbsp Proposal Title<span flex></span><b>Action</b></span>
         </md-subheader>
     </md-list>
     
     <div>
-        <md-card ng-click="goto('proposal/0001')" style="cursor: pointer; cursor: hand;">
+        <md-card ng-repeat="proposal in proposals.id" ng-click="goto('proposal/' + proposal.id)" style="cursor: pointer; cursor: hand;">
             <md-card-title>
                 <md-card-title-text>
-                    <span><b>Proposal#0001</b> &nbsp A Proposal To Set A New Matriarch Controller To Enable New Features</span>
+                    <span layout="row">Proposal#{{proposal.id}} - {{proposal.description}}<span flex></span>{{proposal.action}}</span>
                 </md-card-title-text>
             </md-card-title>
             <md-card-content style="padding-bottom:0px !important; padding-top:5px;" layout="row">
+                <md-button ng-disabled="true">against</md-button>&nbsp&nbsp&nbsp
                 <md-slider-container flex>
-                    <md-slider ng-model="proposal1Percent" aria-label="Proposal 1 Percent Support" flex md-discrete ng-readonly="true" ng-disabled="true"></md-slider>
+                    <md-slider ng-model="support" aria-label="Proposal Percent Support" flex md-discrete ng-readonly="true" ng-disabled="true"></md-slider>
                 </md-slider-container>
-                &nbsp<b>yes</b>
+                &nbsp&nbsp&nbsp<md-button ng-disabled="true">support</md-button>
             </md-card-content>
         </md-card>
-        <md-card ng-click="goto('proposal/0002')"  style="cursor: pointer; cursor: hand;">
-            <md-card-title>
-                <md-card-title-text>
-                    <span><b>Proposal#0002</b> &nbsp A Proposal To Start A New Project</span>
-                </md-card-title-text>
-            </md-card-title>
-            <md-card-content style="padding-bottom:0px !important; padding-top:5px;" layout="row">
-                <md-slider-container flex>
-                    <md-slider ng-model="proposal2Percent" aria-label="Proposal 2 Percent Support" flex md-discrete ng-readonly="true" ng-disabled="true"></md-slider>
-                </md-slider-container>
-                &nbsp<b>yes</b>
-            </md-card-content>
-        </md-card>
-        <md-card ng-click="goto('proposal/0003')"  style="cursor: pointer; cursor: hand;">
-            <md-card-title>
-                <md-card-title-text>
-                    <span><b>Proposal#0003</b> &nbsp A Proposal To Increase The Max Token Supply By 1000 Arc To Fund A Project</span>
-                </md-card-title-text>
-            </md-card-title>
-            <md-card-content style="padding-bottom:0px !important; padding-top:5px;" layout="row">
-                <md-slider-container flex>
-                    <md-slider ng-model="proposal3Percent" aria-label="Proposal 3 Percent Support" flex md-discrete ng-readonly="true" ng-disabled="true"></md-slider>
-                </md-slider-container>
-                &nbspno
-            </md-card-content>
-        </md-card>
-    </div>
     </div>
 </md-content>
 <footer></footer>
