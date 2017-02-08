@@ -34,7 +34,7 @@
     
     <div layout="row">
         <div layout="column">
-            <md-button class="md-raised" ng-click="vote(false)" ng-disabled="proposal.passed" flex>against</md-button>
+            <md-button class="md-raised" ng-click="vote(false)" ng-disabled="proposal.passed" flex>no</md-button>
         </div>
         <div flex>
             <md-card>
@@ -46,10 +46,10 @@
             </md-card>
         </div>
         <div layout="column">
-            <md-button class="md-raised" ng-click="vote(true)" ng-disabled="proposal.passed" flex>support</md-button>
+            <md-button class="md-raised" ng-click="vote(true)" ng-disabled="proposal.passed" flex>yes</md-button>
         </div>
         <div ng-show="true" layout="column">
-            <md-button class="md-raised" ng-click="approve()" ng-disabled="proposal.support_percent < majorityPercent" flex>Pass</md-button>
+            <md-button class="md-raised" ng-click="pass()" ng-hide ng-show="curator == currentAccount" ng-disabled="proposal.support_percent < majorityPercent" flex>Pass</md-button>
         </div>
     </div>
     

@@ -1,0 +1,14 @@
+<md-card ng-click="goto('proposal/' + id)" style="cursor: pointer; cursor: hand;">
+    <md-card-title>
+        <md-card-title-text>
+            <span layout="row">Proposal#{{proposal.id}} - {{proposal.title}}<span flex></span>{{proposal.action}}</span>
+        </md-card-title-text>
+    </md-card-title>
+    <md-card-content style="padding-bottom:0px !important; padding-top:5px;" layout="row">
+        <md-button ng-disabled="true">against</md-button>&nbsp&nbsp&nbsp
+        <md-slider-container flex>
+            <md-slider ng-model="support" aria-label="Proposal Percent Support" flex md-discrete ng-readonly="true" ng-disabled="true"></md-slider>
+        </md-slider-container>
+        &nbsp&nbsp&nbsp<md-button ng-disabled="true">support</md-button>
+    </md-card-content>
+</md-card>

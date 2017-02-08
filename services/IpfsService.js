@@ -7,7 +7,7 @@ function ($q) {
 		getIpfsData: function (ipfsHash) {
             var deferred = $q.defer();
             
-            var local = false;//localStorage.getItem(ipfsHash);
+            var local = localStorage.getItem(ipfsHash);
             if(!local){
                 //console.log("fetching data from ipfs for", ipfsHash);
                 var post = ipfs.catJson(ipfsHash, function(err, ipfsData) {
@@ -15,15 +15,16 @@ function ($q) {
                         deferred.reject(err);
                     } else {
                         localStorage.setItem(ipfsHash,JSON.stringify(ipfsData));
-                        console.log(ipfsData);
-                        var obj = JSON.parse(ipfsData);
-                        console.log(ipfsData);
-                        deferred.resolve(ipfsData);
+                        var parsed = JSON.parse(ipfsData);
+                        console.log(parsed);
+                        deferred.resolve(parsed);
                     }
                 });
             } else {
                 //console.log('Found ipfs data in localStorage');
-                deferred.resolve(JSON.parse(local));
+                var parsed = JSON.parse(local);
+                console.log(parsed);
+                deferred.resolve(parsed);
             }
             
             return deferred.promise;

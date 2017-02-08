@@ -43,10 +43,10 @@ function($scope,$location,Matriarch,MiniMeToken,Web3Service,IpfsService){
     function(proposal){
         $scope.proposal = proposal;
         $scope.action = web3.toAscii(proposal[0]);
-        $scope.passed = proposal[5];
-        $scope.rejected = proposal[6];
-        var support = web3.fromWei(proposal[8],'ether').toNumber();
-        var against = web3.fromWei(proposal[9],'ether').toNumber();
+        $scope.passed = proposal[4];
+        $scope.rejected = proposal[5];
+        var support = web3.fromWei(proposal[7],'ether').toNumber();
+        var against = web3.fromWei(proposal[8],'ether').toNumber();
         console.log(support,against);
         $scope.support = 0;
 
@@ -62,21 +62,21 @@ function($scope,$location,Matriarch,MiniMeToken,Web3Service,IpfsService){
 
         IpfsService.getIpfsData(proposal[1]).then(
         function(data){
-            console.log($scope.proposal, data);
+            console.log(data);
+            data = JSON.parse(data);
             $scope.proposal = {
                 action: web3.toAscii(proposal[0]),
                 hash: proposal[1],
                 address: proposal[2],
                 amount: web3.fromWei(proposal[3].toNumber(),'ether'),
-                majority_percent: proposal[4],
-                passed: proposal[5],
-                rejected: proposal[6],
-                timestamp: new Date(proposal[7]*1000),
+                passed: proposal[4],
+                rejected: proposal[5],
+                timestamp: new Date(proposal[6]*1000),
                 support_percent: $scope.support,
                 against_percent: $scope.against,
                 support: support,
                 against: against,
-                totalVoters: proposal[10].toNumber(),
+                totalVoters: proposal[9].toNumber(),
                 title: data.title,
                 description: data.description
             };
@@ -101,8 +101,8 @@ function($scope,$location,Matriarch,MiniMeToken,Web3Service,IpfsService){
         });
     };
     
-    $scope.approve = function(){
-        Matriarch.tallyVotes($scope.id).then(
+    $scope.pass = function(){
+        Matriarch.passProposal($scope.id).then(
         function(txHash){
             console.log(txHash);
         }).catch(function(err){
