@@ -1,5 +1,5 @@
-Matriarch.controller('MeDaoViewController', ['$scope','Web3Service','MeDao','MiniMeToken','Matriarch','Congress',
-function($scope, Web3Service, MeDao, MiniMeToken, Matriarch, Congress){
+Matriarch.controller('MeDaoViewController', ['$scope','Web3Service','MeDao','MiniMeToken','Matriarch','Congress','IpfsService',
+function($scope, Web3Service, MeDao, MiniMeToken, Matriarch, Congress,IpfsService){
     console.log('Loading MeDao View');
     
     $scope.created = true;

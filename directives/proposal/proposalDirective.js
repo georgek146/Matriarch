@@ -1,5 +1,5 @@
-Matriarch.directive('proposal', ['$location','Web3Service','IpfsService','MiniMeToken','Matriarch',
-function($location, Web3Service, IpfsService, MiniMeToken, Matriarch) {
+Matriarch.directive('proposal', ['$location','Web3Service','IpfsService','MiniMeToken','Congress',
+function($location, Web3Service, IpfsService, MiniMeToken, Congress) {
 	return {
 		restrict: 'E',
 		scope: {
@@ -10,7 +10,7 @@ function($location, Web3Service, IpfsService, MiniMeToken, Matriarch) {
 		controller: function($scope){
             console.log('Loading proposal');
             
-            Matriarch.getProposal($scope.id).then(
+            Congress.getProposal($scope.id).then(
             function(proposal){
                 var support = web3.fromWei(proposal[7],'ether').toNumber();
                 var against = web3.fromWei(proposal[8],'ether').toNumber();
