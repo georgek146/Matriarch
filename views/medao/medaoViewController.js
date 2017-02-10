@@ -196,13 +196,13 @@ function($scope, Web3Service, MeDao, MiniMeToken, Matriarch, Congress){
                 Congress.changeController(contract.address).then(
                 function(txHash){
                     console.log('Set Congress Controller txHash:',txHash);
-                    $scope.hidden = false;
-                    $scope.created = true;
-                    setup();
                 }).catch(function(err){
                     console.error('Set Congress Controller failed', err);
                 });
                 
+                $scope.hidden = false;
+                $scope.created = true;
+                setup();
             } else {
                 if(err)
                     console.error(err);
