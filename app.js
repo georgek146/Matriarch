@@ -22,6 +22,10 @@ Matriarch.config(function ($routeProvider) {
         templateUrl: 'views/proposal/proposalView.html',
         controller: 'ProposalViewController'
     }).
+    when('/medao/:address', {
+        templateUrl: 'views/medao/medaoView.html',
+        controller: 'MeDaoViewController'
+    }).
 	otherwise({
       redirectTo: '/home'
     });
@@ -49,7 +53,7 @@ Matriarch.filter('capitalize', function() {
             function capitalizeString(inputString){
                 return inputString.substring(0,1).toUpperCase() + inputString.substring(1);
             }
-        };
+        }
     }
 });
 

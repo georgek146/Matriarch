@@ -2,13 +2,13 @@
     <md-content class="md-padding" flex>
         <md-nav-bar md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links">
             <md-nav-item md-nav-click="goto('home')" name="home">Matriarch</md-nav-item>
-            <md-nav-item md-nav-click="goto('proposals')" name="proposals">Proposals</md-nav-item>
-            <md-nav-item ng-show="id" md-nav-click="" name="proposal/{{id}}">Proposal#{{id}}</md-nav-item>
-            <md-button ng-disabled="true"> {{etherBalance.toFixed(2)}} ether</md-button>
-            <md-button ng-disabled="true"> {{tokenBalance.toFixed(2)}} {{symbol}}</md-button>
+            <md-nav-item md-nav-click="goto('medao/'+ currentAccount)" name="medao/{{currentAccount}}">Me</md-nav-item>
             <span flex></span>
-            <md-nav-item md-nav-click="goto('myproposals')" name="myproposals">My Proposals</md-nav-item>
-            <md-nav-item md-nav-click="goto('myvotes')" name="myvotes">My Votes</md-nav-item>
+            <md-button style="text-transform:none;" ng-disabled="true"><small>Logged in as: {{currentAccount}}</small></md-button>
+            <md-button ng-disabled="true"> {{etherBalance.toFixed(2)}} ether</md-button>
+            <md-button ng-show="symbol" ng-disabled="true"> {{tokenBalance.toFixed(2)}} {{symbol}}</md-button>
+            <!--<md-nav-item md-nav-click="goto('myproposals')" name="myproposals">My Proposals</md-nav-item>
+            <md-nav-item md-nav-click="goto('myvotes')" name="myvotes">My Votes</md-nav-item>-->
         </md-nav-bar>
     </md-content>
 </md-toolbar>

@@ -1,5 +1,5 @@
-Matriarch.directive('toolbar', ['$location','Web3Service','MiniMeToken',
-function($location, Web3Service, MiniMeToken) {
+Matriarch.directive('toolbar', ['$location','Web3Service','MiniMeToken','Matriarch','MeDao',
+function($location, Web3Service, MiniMeToken, Matriarch, MeDao) {
 	return {
 		restrict: 'E',
 		scope: {
@@ -17,6 +17,8 @@ function($location, Web3Service, MiniMeToken) {
                 $location.url(url);
             };
             
+            $scope.currentAccount = Web3Service.getCurrentAccount();
+            
             $scope.currentNavItem = $location.url().slice(1);
             $scope.urlArray = $scope.currentNavItem.split('/');
             $scope.id = $scope.urlArray[1];
@@ -27,35 +29,50 @@ function($location, Web3Service, MiniMeToken) {
                 $scope.id = $scope.urlArray[1];
              });
                         
-            setInterval(function(){
-                
-                MiniMeToken.getCurrentTokenSupply().then(
-                function(supply){
-                    $scope.currentTokenSupply = supply;
-                });
-
-                MiniMeToken.getTokenBalance(Web3Service.getCurrentAccount())
-                .then( function(balance){
-                    $scope.tokenBalance = web3.fromWei(balance, 'ether');
-                }).catch( function(err){
-                    console.error(err);
-                });
-
-                Web3Service.getEtherBalance(Web3Service.getCurrentAccount())
-                .then( function(maxBalance){
-                    $scope.etherBalance = web3.fromWei(maxBalance , 'ether');
-                }).catch( function(err){
-                    console.error(err);
-                });
-            },1000);
             
-            MiniMeToken.getSymbol(Web3Service.getCurrentAccount())
-            .then( function(symbol){
-                $scope.symbol = symbol;
-            }).catch( function(err){
+            Matriarch.getMeDao(Web3Service.getCurrentAccount()).then(
+            function(meDaoAddress){
+                console.log(meDaoAddress);
+                if(meDaoAddress !== '0x0000000000000000000000000000000000000000'){
+                    MeDao.getMMTAddress().then(
+                    function(mmtAddress){
+                        MiniMeToken.setMMTAddress(mmtAddress);
+                        MiniMeToken.getSymbol(Web3Service.getCurrentAccount())
+                        .then( function(symbol){
+                            $scope.symbol = symbol;
+                        }).catch( function(err){
+                            console.error(err);
+                        });
+                        
+                        setInterval(function(){
+                            MiniMeToken.getCurrentTokenSupply().then(
+                            function(supply){
+                                $scope.currentTokenSupply = supply;
+                            });
+
+                            MiniMeToken.getTokenBalance(Web3Service.getCurrentAccount())
+                            .then( function(balance){
+                                $scope.tokenBalance = web3.fromWei(balance, 'ether');
+                            }).catch( function(err){
+                                console.error(err);
+                            });
+
+                            Web3Service.getEtherBalance(Web3Service.getCurrentAccount())
+                            .then( function(maxBalance){
+                                $scope.etherBalance = web3.fromWei(maxBalance , 'ether');
+                            }).catch( function(err){
+                                console.error(err);
+                            });
+                        },1000);
+                    }).catch(function(err){
+                        console.error(err);
+                    });
+                } else {
+                    $scope.created = false;
+                }
+            }).catch(function(err){
                 console.error(err);
             });
-            
 		},
 		link : function($scope, $element, $attrs) {
             

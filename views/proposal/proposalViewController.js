@@ -1,13 +1,13 @@
-Matriarch.controller('ProposalViewController', ['$scope','$location','Matriarch','MiniMeToken','Web3Service','IpfsService',
-function($scope,$location,Matriarch,MiniMeToken,Web3Service,IpfsService){
+Matriarch.controller('ProposalViewController', ['$scope','$location','MeDao','MiniMeToken','Web3Service','IpfsService',
+function($scope,$location,MeDao,MiniMeToken,Web3Service,IpfsService){
     console.log('Loading Proposal View');
     
-    Matriarch.getCurator().then(
+    MeDao.getCurator().then(
     function(curator){
         $scope.curator = curator;
     });
     
-    Matriarch.getMajorityPercent().then(
+    MeDao.getMajorityPercent().then(
     function(percent){
         $scope.majorityPercent = percent;
     });
@@ -32,14 +32,14 @@ function($scope,$location,Matriarch,MiniMeToken,Web3Service,IpfsService){
     $scope.urlArray = $scope.currentNavItem.split('/');
     $scope.id = $scope.urlArray[1];
     
-    Matriarch.getTotalLockedTokens().then(
+    MeDao.getTotalLockedTokens().then(
     function(locked){
         $scope.totalLocked = web3.fromWei(locked.toNumber(),'ether');;
     }).catch( function(err){
         console.error(err);
     });
     
-    Matriarch.getProposal($scope.id).then(
+    MeDao.getProposal($scope.id).then(
     function(proposal){
         $scope.proposal = proposal;
         $scope.action = web3.toAscii(proposal[0]);
@@ -84,7 +84,7 @@ function($scope,$location,Matriarch,MiniMeToken,Web3Service,IpfsService){
     });
     
     $scope.vote = function(support){
-        Matriarch.vote($scope.id,support).then(
+        MeDao.vote($scope.id,support).then(
         function(txHash){
             console.log(txHash);
         }).catch(function(err){
@@ -93,7 +93,7 @@ function($scope,$location,Matriarch,MiniMeToken,Web3Service,IpfsService){
     };
     
     $scope.unvote = function(){
-        Matriarch.vote($scope.id).then(
+        MeDao.vote($scope.id).then(
         function(txHash){
             console.log(txHash);
         }).catch(function(err){
@@ -102,7 +102,7 @@ function($scope,$location,Matriarch,MiniMeToken,Web3Service,IpfsService){
     };
     
     $scope.pass = function(){
-        Matriarch.passProposal($scope.id).then(
+        MeDao.passProposal($scope.id).then(
         function(txHash){
             console.log(txHash);
         }).catch(function(err){

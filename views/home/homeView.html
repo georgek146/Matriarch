@@ -1,189 +1,19 @@
 <md-content layout="column">
-    <span style="height:9px;"></span><!-- This is a hack to fix a weird spacing bug with the <toolbar></toolbar>-->
     <div>
         <md-card>
             <md-card-title>
                 <md-card-title-text>
-                    <span layout="row" class="md-headline">{{name | capitalize}} Token<span flex></span><small>{{currentTokenSupply}}/{{maxTokenSupply}} {{symbol}}</small></span>
+                    <span layout="row" layout-align="center center"><span class="md-headline">Welcome to Matriarch</span>
                 </md-card-title-text>
             </md-card-title>
             <md-card-content>
-                <span layout="row">Logged in as:<span flex></span><small>{{currentAccount}}</small></span>
-            </md-card-content>
-        </md-card>
-    </div>
-
-    <md-divider></md-divider>
-    
-    <md-list>
-        <md-subheader class="md-no-sticky">{{name | capitalize}} Details</md-subheader>
-        <md-list-item class="secondary-button-padding">
-            <p>ceo</p>
-            <p class="md-secondary">{{ceo}}</p>
-        </md-list-item>
-        <md-list-item class="secondary-button-padding">
-            <p>vault</p>
-            <p class="md-secondary">{{vault}}</p>
-        </md-list-item>
-        <md-list-item class="secondary-button-padding">
-            <p>curator</p>
-            <p class="md-secondary">{{curator}}</p>
-        </md-list-item>
-    </md-list>
-        
-    <md-divider></md-divider>
-
-    <div layout="row">
-        <md-card ng-if="maxTokenSupply > currentTokenSupply" flex>
-            <md-card-title>
-                <md-card-title-text>
-                    <span class="md-headline" layout="row"> Initial Coin Offering (ICO) </span>
-                </md-card-title-text>
-            </md-card-title>
-            <md-card-content layout="column">
-                <p>{{name | capitalize}} has a maximum supply of {{maxTokenSupply}} {{symbol}} and can be divided down to {{decimals}} decimal places. Users can choose to lock {{symbol}} in return for the ability to vote on proposals. A voters weight is directly proportional to their {{symbol}} balance. <small><a style="color:blue" href="https://github.com/ChicoBitcoinJoe/Matriarch"> learn more </a></small></p>
-                <span layout layout-align="center" flex><small>1 ether = 1 arc</small></span>
-                <span layout="row">
-                    <md-input-container class="skinny-container" flex>
-                        <label>Amount</label>
-                        <input ng-model="actions.buy.ico">
-                    </md-input-container>
-                    <p layout="column">
-                        <span flex></span>
-                        &nbsp{{symbol}}
-                    </p>   
-                </span>
-                <span layout="row">
-                    <md-button flex ng-click="actions.buy.ico = actions.buy.max">max</md-button>
-                    <md-button flex ng-click="buyICOTokens(actions.buy.ico)">Buy</md-button>
-                </span>
-            </md-card-content>
-        </md-card>
-        
-        <md-card flex>
-            <md-card-title>
-                <md-card-title-text>
-                    <span class="md-headline">Transfer {{symbol | capitalize}}</span>
-                </md-card-title-text>
-            </md-card-title>
-            <md-card-content layout="column">
-                <md-input-container class="skinny-container">
-                    <label>To</label>
-                    <input type="text" placeholder="0x1a4k..." ng-model="actions.transfer.to">
-                </md-input-container>
-                <span layout="row">
-                    <md-input-container class="skinny-container" flex>
-                        <label>Amount</label>
-                        <input ng-model="actions.transfer.amount">
-                    </md-input-container>
-                    <p layout="column">
-                        <span flex></span>
-                        {{symbol}}
-                    </p>
-                </span>
-                <span layout="row">
-                    <md-button flex ng-click="actions.transfer.amount = actions.sell.max">max</md-button>
-                    <md-button flex ng-click="transfer(actions.transfer.to, actions.transfer.amount)" ng-disabled="{{transfersAllowed}}">Transfer</md-button>
-                </span>
-            </md-card-content>
-        </md-card>
-    </div>
-    <div id="trade" layout="row">
-        <md-card flex>
-            <md-card-title>
-                <md-card-title-text>
-                    <span class="md-headline">Buy {{symbol | capitalize}} <span flex></span><small>(demo )</small></span>
-                </md-card-title-text>
-            </md-card-title>
-            <md-card-content layout="column">
-                <span layout="row">
-                    <md-input-container class="skinny-container" flex>
-                        <label>Amount</label>
-                        <input ng-model="actions.buy.token">
-                    </md-input-container>
-                    <p layout="column">
-                        <span flex></span>
-                        eth
-                    </p>
-                </span>
-                <span layout="row">
-                    <span flex></span>
-                    <span>
-                        <small>
-                            The best buy price available is (2.00 arc/eth) with 
-                            <span style="color:blue; cursor: pointer; cursor: hand;" ng-click="actions.buy.token = 1"> 1 {{symbol}} </span> 
-                            available
-                        </small>
-                    </span>
-                </span>
-                <span ng-show="actions.buy.token > 0" layout="row">
-                    <span flex></span>
-                    <span>
-                        <small>
-                            {{actions.buy.token}} ether will buy a total of 
-                            <span ng-show="actions.buy.token <= 1">
-                                {{actions.buy.token * 2}} {{symbol}}
-                                (2 arc/eth)
-                            </span>
-                            <span ng-show="actions.buy.token > 1">
-                                {{(actions.buy.token*1 + 1)}} {{symbol}}
-                                ({{ (action.buy.token + 1)/actions.buy.token + 1}} arc/eth)
-                            </span>
-                        </small>
-                    </span>
-                </span>
-                <span layout="row">
-                    <md-button flex ng-click="actions.buy.token = actions.buy.max">max</md-button>
-                    <md-button flex ng-disabled="true">Buy</md-button>
-                </span>
-            </md-card-content>
-        </md-card>
-        <md-card flex>
-            <md-card-title>
-                <md-card-title-text>
-                    <span class="md-headline">Sell {{symbol | capitalize}} <span flex></span><small>(demo)</small></span>
-                </md-card-title-text>
-            </md-card-title>
-            <md-card-content layout="column">
-                <span layout="row">
-                    <md-input-container class="skinny-container" flex>
-                        <label>Amount</label>
-                        <input ng-model="actions.sell.token">
-                    </md-input-container>
-                    <p layout="column">
-                        <span flex></span>
-                        Ether
-                    </p>
-                </span>
-                <span layout="row">
-                    <span flex></span>
-                    <span>
-                        <small>
-                            The best sell price available is (1.95 arc/eth) with 
-                            <span style="color:blue; cursor: pointer; cursor: hand;" ng-click="actions.sell.token = 0.25"> 0.25 Ether </span> 
-                            worth available
-                        </small>
-                    </span>
-                </span>
-                <span ng-show="actions.sell.token > 0" layout="row">
-                    <span flex></span>
-                    <span>
-                        <small>
-                            <span ng-show="actions.sell.token <= 0.25">
-                            {{actions.sell.token}} {{symbol}} will sell for a total of 
-                                {{actions.sell.token / 1.95}} ether
-                                (1.95 arc/eth)
-                            </span>
-                            <span style="color:red" ng-show="actions.sell.token > 0.25">
-                                *Unfortunately there are not enough buyers to sell {{actions.sell.token}} {{symbol}}!
-                            </span>
-                        </small>
-                    </span>
-                </span>
-                <span layout="row">
-                    <md-button flex ng-click="actions.sell.token = actions.sell.max">max</md-button>
-                    <md-button flex ng-disabled="true">Sell</md-button>
-                </span>
+                <p>Matriarch is a platform for creating a 'MeDao'. MeDaos are a tool for investing in people rather than the traditional route of investing in a business. MeDao's can start as a centrally issued token and with the flip of a switch be turned into a fully functioning decentralized autonomous organization.</p>
+                <p>The token will be implemented using the erc-20 compatible MiniMe Token (MMT). The MMT comes with an incredible feature not found in the standard erc-20 token specification... Cloning! Anyone can take the address of any 'parent' MMT and create a clone of the  parent. Additionally, this cloning process can be done at any block height in the past. An consequence of this feature is of course new business models not previously possible before.</p>
+                <md-divider></md-divider>
+                <p>What might these businesss models look like in the real world?</p>
+                <p>There is a talented musician named Michael who is looking for ways to fund his career. He finds a platform that allows him to accept money directly to improve his career as he sees fit. He is given access to ideas and proposals from funders and can even submit his own ideas to gauge funder opinion. The 'weight' of each voters opinion is proportional to the amount of tokens each voter holds. Michael pledges to his holders: A clone of his own token will be created on the release day of every single or set and profit collected from sales is sent to the holders of the cloned token. Holding Michael's tokens gaurantees that holder to the revenue from any clones created in the future. Finally, holders have a vested interest in offering help to Michael and his career even if only to increase the the value of their own tokens.</p>
+                <md-divider></md-divider>
+                <p>This basic idea can be applied to so many areas I hope you have fun thinking of some.</p>
             </md-card-content>
         </md-card>
     </div>
