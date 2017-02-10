@@ -1,5 +1,5 @@
-Matriarch.directive('toolbar', ['$location','Web3Service','MiniMeToken','Matriarch','MeDao',
-function($location, Web3Service, MiniMeToken, Matriarch, MeDao) {
+Matriarch.directive('toolbar', ['$location','Web3Service','MiniMeToken','Matriarch','MeDao','Congress',
+function($location, Web3Service, MiniMeToken, Matriarch, MeDao, Congress) {
 	return {
 		restrict: 'E',
 		scope: {
@@ -33,7 +33,15 @@ function($location, Web3Service, MiniMeToken, Matriarch, MeDao) {
             Matriarch.getMeDao(Web3Service.getCurrentAccount()).then(
             function(meDaoAddress){
                 console.log(meDaoAddress);
+                $scope.meDaoAddress = meDaoAddress;
                 if(meDaoAddress !== '0x0000000000000000000000000000000000000000'){
+                    MeDao.getCongressAddress().then(
+                    function(congressAddress){
+                        Congress.setCongressAddress(congressAddress);
+                    }).catch(function(err){
+                        console.error(err)
+                    });
+                        
                     MeDao.getMMTAddress().then(
                     function(mmtAddress){
                         MiniMeToken.setMMTAddress(mmtAddress);

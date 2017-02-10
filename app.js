@@ -10,21 +10,21 @@ Matriarch.config(function ($routeProvider) {
         templateUrl: 'views/congress/congressView.html',
         controller: 'CongressViewController'
     }).
-    when('/myproposals', {
+    when('/myproposals/:address', {
         templateUrl: 'views/myproposals/myProposalsView.html',
         controller: 'MyProposalsViewController'
     }).
-    when('/myvotes', {
+    when('/myvotes/:address', {
         templateUrl: 'views/votes/votesView.html',
         controller: 'VotesViewController'
+    }).
+    when('/medao/:account', {
+        templateUrl: 'views/medao/medaoView.html',
+        controller: 'MeDaoViewController'
     }).
     when('/proposal/:id', {
         templateUrl: 'views/proposal/proposalView.html',
         controller: 'ProposalViewController'
-    }).
-    when('/medao/:address', {
-        templateUrl: 'views/medao/medaoView.html',
-        controller: 'MeDaoViewController'
     }).
 	otherwise({
       redirectTo: '/home'

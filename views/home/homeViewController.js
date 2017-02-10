@@ -1,5 +1,5 @@
-Matriarch.controller('HomeViewController', ['$scope','$location','Web3Service','Matriarch',
-function($scope, $location, Web3Service, Matriarch){
+Matriarch.controller('HomeViewController', [
+function(){
     console.log('Loading Home View');
     
 }]);

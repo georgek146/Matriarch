@@ -29,7 +29,7 @@
         </md-card>
     </div>
 
-    <md-divider style="height:50px;"></md-divider>
+    <md-divider ng-show="!created" style="height:50px;"></md-divider>
     
     <div ng-hide="hidden">
         <div>
@@ -71,7 +71,7 @@
                 </md-card-title>
                 <md-card-content layout="column">
                     <p>{{name | capitalize}} has a maximum supply of {{maxTokenSupply}} {{symbol}} and can be divided down to {{decimals}} decimal places. Users can choose to lock {{symbol}} in return for the ability to vote on proposals. A voters weight is directly proportional to their {{symbol}} balance. <small><a style="color:blue" href="https://github.com/ChicoBitcoinJoe/Matriarch"> learn more </a></small></p>
-                    <span layout layout-align="center" flex><small>1 ether = 1 arc</small></span>
+                    <span layout layout-align="center" flex><small>1 ether = 1 {{symbol}}</small></span>
                     <span layout="row">
                         <md-input-container class="skinny-container" flex>
                             <label>Amount</label>
@@ -105,8 +105,7 @@
                             <label>Amount</label>
                             <input ng-model="actions.transfer.amount">
                         </md-input-container>
-                        <p layout="column">
-                            <span flex></span>
+                        <p>
                             {{symbol}}
                         </p>
                     </span>
@@ -117,6 +116,9 @@
                 </md-card-content>
             </md-card>
         </div>
+        
+        <md-divider></md-divider>
+        
         <div id="trade" layout="row">
             <md-card flex>
                 <md-card-title>
@@ -130,10 +132,9 @@
                             <label>Amount</label>
                             <input ng-model="actions.buy.token">
                         </md-input-container>
-                        <p layout="column">
-                            <span flex></span>
+                        <div>
                             eth
-                        </p>
+                        </div>
                     </span>
                     <span layout="row">
                         <span flex></span>
@@ -216,6 +217,59 @@
                 </md-card-content>
             </md-card>
         </div>
+        
+    <md-divider></md-divider>
+    
+    <md-list layout="row">
+        <md-subheader class="md-no-sticky">Submit New Proposal</md-subheader>
+        <span flex></span>
+        <md-button ng-click="submitProposal()">Submit</md-button>&nbsp
+    </md-list>
+    
+    <md-divider></md-divider>
+    
+    <div layout="row">
+        <md-card flex>
+            <md-card-content>
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Action</label>
+                    <md-select ng-model="proposal.action">
+                        <md-option ng-repeat="option in options" value="{{option}}">{{action}}</md-option>
+                    </md-select>
+                </md-input-container>
+                
+                <md-input-container ng-show="proposal.action == 'updateMatriarch' || proposal.action == 'generateTokens'" class="md-block">
+                    <label>Address</label>
+                    <input ng-model="proposal.address">
+                </md-input-container>
+                
+                <md-input-container ng-show="proposal.action == 'generateTokens'" class="md-block">
+                    <label>Amount</label>
+                    <input ng-model="proposal.amount">
+                </md-input-container>
+                
+                <md-input-container class="md-block">
+                    <label>Title</label>
+                    <input ng-model="proposal.title">
+                </md-input-container>
+                
+                <md-input-container class="md-block">
+                    <label>Description</label>
+                    <textarea ng-model="proposal.description" md-maxlength="150000" rows="5" md-select-on-focus></textarea>
+                </md-input-container>
+            </md-card-content>
+        </md-card>
+        <md-card flex>
+            <md-card-content>
+                <h4 layout="row">Proposal#{{total_proposals}}<span flex></span>{{proposal.action}}</h4>
+                <span layout="row">{{proposal.address}}<span flex></span>{{proposal.amount}}</span></h5>
+                <h5 layout="row">{{proposal.title}}</h5>
+                <div>
+                    {{proposal.description}}
+                </div>
+            </md-card-content>
+        </md-card>
+    </div>
     </div>
 </md-content>
 <footer></footer>

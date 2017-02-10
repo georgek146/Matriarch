@@ -1,13 +1,13 @@
-Matriarch.controller('CongressViewController', ['$scope','$location','MeDao','MiniMeToken','Web3Service','IpfsService',
-function($scope,$location,MeDao,MiniMeToken,Web3Service,IpfsService){
+Matriarch.controller('CongressViewController', ['$scope','$location','Congress','MiniMeToken','Web3Service','IpfsService',
+function($scope,$location,Congress,MiniMeToken,Web3Service,IpfsService){
     console.log('Loading Congress View');
     
-    MeDao.getMajorityPercent().then(
+    Congress.getMajorityPercent().then(
     function(percent){
         $scope.majorityPercent = percent;
     });
     
-    MeDao.getCurator().then(
+    Congress.getCurator().then(
     function(curator){
         $scope.curator = curator;
     });
@@ -32,7 +32,7 @@ function($scope,$location,MeDao,MiniMeToken,Web3Service,IpfsService){
         $location.url(url);
     };
     
-    MeDao.getTotalLockedTokens().then(
+    Congress.getTotalLockedTokens().then(
     function(locked){
         $scope.totalLocked = web3.fromWei(locked.toNumber(),'ether');;
     }).catch( function(err){
@@ -40,7 +40,7 @@ function($scope,$location,MeDao,MiniMeToken,Web3Service,IpfsService){
     });
     
     $scope.proposals = {ids:[]};
-    MeDao.getTotalProposals().then(
+    Congress.getTotalProposals().then(
     function(total){
         $scope.total_proposals = total.toNumber();
         
