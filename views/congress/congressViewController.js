@@ -41,6 +41,20 @@ function($scope,$location,Congress,MiniMeToken,Web3Service,IpfsService,MeDao,Mat
                     $scope.percentCurrentSupply = Math.round($scope.totalLocked/$scope.currentTokenSupply*100);
 
             });
+            
+            MiniMeToken.getName(Web3Service.getCurrentAccount())
+            .then( function(name){
+                $scope.name = name;
+            }).catch( function(err){
+                console.error(err);
+            });
+            
+            MiniMeToken.getTokenBalance(Web3Service.getCurrentAccount()).then(
+            function(balance){
+                $scope.tokenBalance = web3.fromWei(balance,'ether').toNumber();
+            }).catch(function(err){
+                console.error(err);
+            });
         }).catch(function(err){
             console.error(err);
         });

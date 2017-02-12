@@ -50,7 +50,7 @@ function($scope, $location, Web3Service, MeDao, MiniMeToken, Matriarch, Congress
         vault: Web3Service.getCurrentAccount(),
         minimeToken: null,
         congress: null,
-        maxTokenSupply: web3.toWei(1000000000000000000000000,'ether');// 1 million tokens with 18 decimal places
+        maxTokenSupply: web3.toWei(1000000000000000000000000,'ether') // 1 million tokens with 18 decimal places
     };
     
     $scope.registerMeDao = function(address){
