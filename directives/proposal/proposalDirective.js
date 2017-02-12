@@ -10,6 +10,10 @@ function($location, Web3Service, IpfsService, MiniMeToken, Congress) {
 		controller: function($scope){
             console.log('Loading proposal');
             
+            var url = $location.url();
+            var array = url.split('/');
+            $scope.currentAccount = array[2];
+            
             Congress.getProposal($scope.id).then(
             function(proposal){
                 var support = web3.fromWei(proposal[7],'ether').toNumber();
@@ -25,8 +29,8 @@ function($location, Web3Service, IpfsService, MiniMeToken, Congress) {
                 
                 IpfsService.getIpfsData(proposal[1]).then(
                 function(data){
-                    console.log(data);
-                    data = JSON.parse(data);
+                    if(typeof data !== 'object')
+                        data = JSON.parse(data);
                     $scope.proposal = {
                         id: $scope.id,
                         action: web3.toAscii(proposal[0]),
@@ -43,9 +47,12 @@ function($location, Web3Service, IpfsService, MiniMeToken, Congress) {
                         description: data.description
                     };
                 });
+            }).catch(function(err){
+                console.error(err);
             });
             
             $scope.goto = function(url) {
+                console.log(url);
                 $location.url(url);
             };
 		},

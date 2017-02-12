@@ -1,0 +1,58 @@
+<div layomd-card>
+            <md-card-title>
+                <md-card-title-text>
+                    <span class="md-headline">Create Your MeDao</span>
+                </md-card-title-text>
+            </md-card-title>
+            <md-card-content>
+                <div layout="row">
+                    <md-input-container flex>
+                        <label>Token Name</label>
+                        <input ng-model="minimetoken.tokenName">
+                    </md-input-container>
+                    <md-divider style="margin:15px;"></md-divider>
+                    <md-input-container>
+                        <label>Token Symbol</label>
+                        <input ng-model="minimetoken.tokenSymbol" md-maxlength="3">
+                    </md-input-container>
+                </div>
+                <div layout="row">
+                    <md-input-container>
+                        <md-switch class="md-primary" ng-disabled="true">show advanced options</md-switch>
+                    </md-input-container>
+                    <span flex></span>
+                    <md-button ng-click="deployMMT()">Deploy MeDao</md-button>
+                </div>
+                <div>
+                    <small style="color:red">*Note: During the deploy process it will ask you to approve around six transactions but none will send ether</small>
+                </div>
+            </md-card-content>
+        </md-card>
+    </div>
+    
+    <md-list-container>
+        <md-subheader>Deployment Progress</md-subheader>
+        <div layout="row">
+            <div layout="column" flex>
+                <md-list-item>MMT Address</md-list-item>
+                <md-list-item>Congress Address</md-list-item>
+                <md-list-item>MeDao Address</md-list-item>
+                <md-list-item>MMT Owner Set</md-list-item>
+                <md-list-item>Congress Owner Set</md-list-item>
+                <md-list-item>MeDao Registered</md-list-item>
+            </div>
+            <div layout="column">
+                <md-list-item>{{mmtAddress}}</md-list-item>
+                <md-list-item>{{congressAddress}}</md-list-item>
+                <md-list-item>{{medaoAddress}}</md-list-item>
+                <md-list-item>{{mmtOwnerSet}}</md-list-item>
+                <md-list-item>{{congressOwnerSet}}</md-list-item>
+                <md-list-item>{{registered}}</md-list-item>
+            </div>
+        </div>
+    
+    
+        
+    </md-list-container>
+    
+</div>

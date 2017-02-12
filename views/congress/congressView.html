@@ -1,21 +1,18 @@
-<md-content layout="column">    
+<div layout="column" layout-padding="5">    
+    
     <div>
         <md-card>
             <md-card-title>
                 <md-card-title-text>
-                    <span layout="row" class="md-headline">Proposals Demo <span flex></span><small>{{totalLocked}} {{symbol}} locked over {{total_proposals}} proposals</small></span>
+                    <span layout="row" class="md-headline">Congress</span>
                 </md-card-title-text>
             </md-card-title>
-            <md-card-content>
-                <span layout="row">Logged in as:<span flex></span><small>{{currentAccount}}</small></span>
-            </md-card-content>
         </md-card>
     </div>
     
     <md-divider></md-divider>
     
     <md-list>
-        <md-subheader class="md-no-sticky">Congress Details</md-subheader>
         <md-list-item class="secondary-button-padding">
             <p>Curator</p>
             <p class="md-secondary">{{curator}}</p>
@@ -24,18 +21,29 @@
             <p>Majority Percent</p>
             <p class="md-secondary">{{majorityPercent}}</p>
         </md-list-item>
+        <md-list-item class="secondary-button-padding">
+            <p>Current Tokens Supply</p>
+            <p class="md-secondary">{{currentTokenSupply}} {{symbol}}</p>
+        </md-list-item>
+        <md-list-item class="secondary-button-padding">
+            <p>Current Tokens Locked <small>({{percentCurrentSupply}}% of current supply)</small></p>
+            <p class="md-secondary">{{totalLocked}} {{symbol}}</p>
+        </md-list-item>
+        <md-list-item class="secondary-button-padding">
+            <p>Total Proposals</p>
+            <p class="md-secondary">{{total_proposals}}</p>
+        </md-list-item>
     </md-list>
     
     <md-divider></md-divider>
     
-    <md-list>
-        <md-subheader class="md-no-sticky">
-            <span layout="row"><b>Proposal#_ID_</b> &nbsp&nbsp Proposal Title<span flex></span><b>Action</b></span>
-        </md-subheader>
-    </md-list>
+    <div layout="row"><span flex></span><md-button ng-click="goto('medao/' + currentAccount + '/submit')">Submit New Proposal</md-button></div>
+    
+    <md-divider></md-divider>
     
     <div ng-repeat="proposal_id in proposals.ids">
-        <proposal id="proposal_id"></proposal>
+        <div>
+            <proposal id="proposal_id"></proposal>
+        </div>
     </div>
-</md-content>
-<footer></footer>
+</div>

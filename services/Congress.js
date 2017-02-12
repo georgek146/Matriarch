@@ -32,9 +32,10 @@ function ($q, Web3Service, MiniMeToken) {
         },
         getMajorityPercent: function(){
             var deferred = $q.defer();
-            Congress.majority_percent(function(err,percent){
+            Congress.majority_percent(
+            function(err,percent){
                 if(!err)
-                    deferred.resolve(percent.toString());
+                    deferred.resolve(percent);
                 else
                     deferred.reject(err);
             });
@@ -84,8 +85,8 @@ function ($q, Web3Service, MiniMeToken) {
             var deferred = $q.defer();
             
             var txdata = {from: Web3Service.getCurrentAccount(), 
-                                 to: Congress_Address,
-                                 gas: 300000};
+                         to: Congress_Address,
+                         gas: 300000};
         
             console.log(txdata);
             Congress.submitProposal(action, description_hash, address, web3.toWei(amount, 'ether'), txdata, 

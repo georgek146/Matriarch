@@ -6,23 +6,23 @@ Matriarch.config(function ($routeProvider) {
         templateUrl: 'views/home/homeView.html',
         controller: 'HomeViewController'
     }).
-    when('/proposals', {
-        templateUrl: 'views/congress/congressView.html',
-        controller: 'CongressViewController'
-    }).
-    when('/myproposals/:address', {
-        templateUrl: 'views/myproposals/myProposalsView.html',
-        controller: 'MyProposalsViewController'
-    }).
-    when('/myvotes/:address', {
-        templateUrl: 'views/votes/votesView.html',
-        controller: 'VotesViewController'
+    when('/deploy', {
+        templateUrl: 'views/deploy/deployView.html',
+        controller: 'DeployViewController'
     }).
     when('/medao/:account', {
         templateUrl: 'views/medao/medaoView.html',
         controller: 'MeDaoViewController'
     }).
-    when('/proposal/:id', {
+    when('/medao/:address/congress', {
+        templateUrl: 'views/congress/congressView.html',
+        controller: 'CongressViewController'
+    }).
+    when('/medao/:address/submit', {
+        templateUrl: 'views/submit/submitView.html',
+        controller: 'SubmitViewController'
+    }).
+    when('/medao/:address/proposal/:id', {
         templateUrl: 'views/proposal/proposalView.html',
         controller: 'ProposalViewController'
     }).

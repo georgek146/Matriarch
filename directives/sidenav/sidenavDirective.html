@@ -1,0 +1,30 @@
+<div class="md-whiteframe-4dp" layout="column" layout-padding="1" flex>
+    <md-toolbar layout="column" layout-padding="1">
+        <h2 >
+            <a href="#home">Matriarch</a>
+            <div layout="row" style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis; font-size:16px;">
+                {{etherBalance}} eth &nbsp&nbsp&nbsp Logged in as: {{currentAccount}}
+            </div>
+        </h2>
+    </md-toolbar>
+    <div layout="column">
+        <h4>Menu</h4>
+        <md-list-container>
+            <md-list-item ng-show="loaded && !deployed" ng-click="goto('deploy')">Deploy Your MeDao</md-list-item>
+            <md-list-item ng-show="deployed" ng-click="goto('medao/' + currentAccount)">My Dao</md-list-item>
+            <md-list-item ng-show="deployed" ng-click="goto('medao/' + currentAccount + '/congress')">- &nbsp&nbsp Congress</md-list-item>
+            <md-list-item ng-show="deployed" ng-click="goto('medao/' + currentAccount + '/submit')">- &nbsp&nbsp Submit Proposal</md-list-item>
+        </md-list-container>
+    </div>
+    <div layout="column" layout-padding="1">
+        <h4>MeDaos</h4>
+        <md-content layout="column" flex>
+            <md-list-container>
+                <md-list-item ng-repeat="ceo in medaos" ng-click="goto('medao/' + ceo)">
+                    <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ceo}}</div>
+                </md-list-item>
+            </md-list-container>
+        </md-content>
+    </div>
+    <footer></footer>
+</div>

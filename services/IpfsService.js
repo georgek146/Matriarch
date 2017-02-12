@@ -15,16 +15,12 @@ function ($q) {
                         deferred.reject(err);
                     } else {
                         localStorage.setItem(ipfsHash,JSON.stringify(ipfsData));
-                        var parsed = JSON.parse(ipfsData);
-                        console.log(parsed);
-                        deferred.resolve(parsed);
+                        deferred.resolve(ipfsData);
                     }
                 });
             } else {
                 //console.log('Found ipfs data in localStorage');
-                var parsed = JSON.parse(local);
-                console.log(parsed);
-                deferred.resolve(parsed);
+                deferred.resolve(JSON.parse(local));
             }
             
             return deferred.promise;

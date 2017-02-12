@@ -1,0 +1,53 @@
+<div layout="column" layout-padding="5">
+    <div>
+        <md-card>
+            <md-card-title>
+                <md-card-title-text>
+                    <span layout="row" class="md-headline">Submit Proposal</span>
+                </md-card-title-text>
+            </md-card-title>
+        </md-card>
+    </div>
+
+    <md-divider></md-divider>
+
+    <div layout="column">
+        <md-card>
+            <md-card-content>
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Action</label>
+                    <md-select ng-model="proposal.action">
+                        <md-option ng-repeat="option in options" value="{{option}}">{{option}}</md-option>
+                    </md-select>
+                </md-input-container>
+                <md-input-container ng-show="proposal.action == 'updateMatriarch' || proposal.action == 'generateTokens'" class="md-block">
+                    <label>Address</label>
+                    <input ng-model="proposal.address">
+                </md-input-container>
+                <md-input-container ng-show="proposal.action == 'generateTokens'" class="md-block">
+                    <label>Amount</label>
+                    <input ng-model="proposal.amount">
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>Title</label>
+                    <input ng-model="proposal.title">
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>Description</label>
+                    <textarea ng-model="proposal.description" md-maxlength="150000" rows="5" md-select-on-focus></textarea>
+                </md-input-container>                
+                <md-button ng-click="submitProposal()">Submit</md-button>
+            </md-card-content>
+        </md-card>
+        <md-card>
+            <md-card-content>
+                <h4 layout="row">Proposal#{{total_proposals}}<span flex></span>{{proposal.action}}</h4>
+                <span layout="row">{{proposal.address}}<span flex></span>{{proposal.amount}}</span></h5>
+                <h5 layout="row">{{proposal.title}}</h5>
+                <div>
+                    {{proposal.description}}
+                </div>
+            </md-card-content>
+        </md-card>
+    </div>
+</div>

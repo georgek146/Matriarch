@@ -21,7 +21,7 @@ function ($q, Web3Service) {
             });
             return deferred.promise;
         },
-        getMeDao: function(account){
+        getMeDaoAddress: function(account){
             var deferred = $q.defer();
             Matriarch.meDaos(account, 
             function(err, meDaoArray) {
@@ -72,6 +72,30 @@ function ($q, Web3Service) {
         vet: function(account) {
             var deferred = $q.defer();
             Matriarch.vet(address, {from:Web3Service.getCurrentAccount()}, 
+            function(err, txHash) {
+                if(err)
+                    deferred.reject(err);
+                else
+                    deferred.resolve(txHash);
+                    
+            });
+            return deferred.promise;
+        },
+        getTotalDaos: function() {
+            var deferred = $q.defer();
+            Matriarch.total_daos({from:Web3Service.getCurrentAccount()}, 
+            function(err, txHash) {
+                if(err)
+                    deferred.reject(err);
+                else
+                    deferred.resolve(txHash);
+                    
+            });
+            return deferred.promise;
+        },
+        getIndex: function(index) {
+            var deferred = $q.defer();
+            Matriarch.index(index, {from:Web3Service.getCurrentAccount()}, 
             function(err, txHash) {
                 if(err)
                     deferred.reject(err);
