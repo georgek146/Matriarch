@@ -13,11 +13,13 @@ function ($q,$http) {
             // this callback will be called asynchronously
             // when the response is available
             console.log('Fetching from gateway!', response);
-            deferred.resolve(response.data);
-        }, function errorCallback(response) {
+            var notparsed = response.data;
+            var parsed = JSON.parse(notparsed);
+            deferred.resolve(parsed);
+        }, function errorCallback(err) {
             // called asynchronously if an error occurs
             // or server returns response with an error status.
-            deferred.reject(response);
+            deferred.reject(err);
         });
         
         return deferred.promise;
@@ -33,8 +35,8 @@ function ($q,$http) {
                 var post = ipfs.catJson(ipfsHash, function(err, ipfsData) {
                     if(err || !ipfsData){
                         getViaGateway(ipfsHash).then(
-                        function(ipfsData){
-                            deferred.resolve(ipfsData);
+                        function(ipfsHash){
+                            deferred.resolve(ipfsHash);
                         }).catch(function(err){
                             deferred.reject(err);
                         });

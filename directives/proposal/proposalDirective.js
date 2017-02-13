@@ -29,8 +29,8 @@ function($location, Web3Service, IpfsService, MiniMeToken, Congress) {
                 
                 IpfsService.getIpfsData(proposal[1]).then(
                 function(data){
-                    if(typeof data !== 'object')
-                        data = JSON.parse(data);
+                    console.log(data);
+                    
                     $scope.proposal = {
                         id: $scope.id,
                         action: web3.toAscii(proposal[0]),
