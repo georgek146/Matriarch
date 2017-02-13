@@ -76,7 +76,7 @@ contract MeDao is TokenController {
     
         tokens.generateTokens(_owner,amount_to_generate);
         if(!vault.send(amount_to_generate))
-            return false;
+            throw;
         
         return true;
     }

@@ -20,7 +20,7 @@ contract Congress is Controlled {
 // Declarations
 ////////////////    
 
-    address curator;
+    address public curator;
 
 ////////////////
 // Constructor
