@@ -1,7 +1,27 @@
-Matriarch.service( 'IpfsService',['$q', 
-function ($q) {
+Matriarch.service( 'IpfsService',['$q','$http',
+function ($q,$http) {
     console.log('Loading IpfsService');
 	ipfs.setProvider();
+    
+    var getViaGateway = function(ipfsHash){
+        var deferred = $q.defer();
+
+        $http({
+            method: 'GET',
+            url: 'http://gateway.ipfs.io/ipfs/' + ipfsHash
+        }).then(function successCallback(response) {
+            // this callback will be called asynchronously
+            // when the response is available
+            console.log('Fetching from gateway!', response);
+            deferred.resolve(response.data);
+        }, function errorCallback(response) {
+            // called asynchronously if an error occurs
+            // or server returns response with an error status.
+            deferred.reject(response);
+        });
+        
+        return deferred.promise;
+    };
     
 	var service = {
 		getIpfsData: function (ipfsHash) {
@@ -12,7 +32,7 @@ function ($q) {
                 //console.log("fetching data from ipfs for", ipfsHash);
                 var post = ipfs.catJson(ipfsHash, function(err, ipfsData) {
                     if(err || !ipfsData){
-                        deferred.reject(err);
+                        return getViaGateway(ipfsHash);
                     } else {
                         localStorage.setItem(ipfsHash,JSON.stringify(ipfsData));
                         deferred.resolve(ipfsData);
@@ -41,20 +61,6 @@ function ($q) {
             return deferred.promise;
 		}
 	};
-    /*$http({
-      method: 'GET',
-      url: 'http://gateway.ipfs.io/ipfs/QmYy4LAoXn2nALvu6UWpWoKoAJEQ967bKSUrVDTQ5XvvMF'
-    }).then(function successCallback(response) {
-        // this callback will be called asynchronously
-        // when the response is available
-        console.log(response);
-        $scope.markdown = response.data;
-        
-    }, function errorCallback(response) {
-        // called asynchronously if an error occurs
-        // or server returns response with an error status.
-        console.log(response);
-    });*/
 
 	return service;
 }]);
