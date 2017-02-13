@@ -80,15 +80,6 @@ contract MeDao is TokenController {
         
         return true;
     }
-    
-    struct Voter {
-        uint timestamp; //To determine inactivity
-        uint locks; //1 lock = 1 vote
-        uint locked_tokens;
-        
-        uint total_votes;
-        mapping(uint => uint) voteIndex; //vote# => proposal_id
-    }
 
     /// @notice Notifies the controller about a token transfer allowing the
     ///  controller to react if desired
