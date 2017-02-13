@@ -10,11 +10,21 @@ function($scope, Web3Service, MeDao, MiniMeToken, Matriarch, Congress, IpfsServi
     function(meDaoAddress){
         if(meDaoAddress !== '0x0000000000000000000000000000000000000000'){
             MeDao.setMeDaoAddress(meDaoAddress);
-            MeDao.getMMTAddress().then(
+            
+            MeDao.getMMTAddress(meDaoAddress).then(
             function(mmtAddress){
                 MiniMeToken.setMMTAddress(mmtAddress);
+                
+                MiniMeToken.getName(mmtAddress)
+                .then( function(name){
+                    $scope.name = name;
+                }).catch( function(err){
+                    console.error(err);
+                });
+                
                 setup();
                 $scope.hidden = false;
+                
                 return MeDao.getCongressAddress();
             }).then(function(congressAddress){
                 Congress.setCongressAddress(congressAddress);
@@ -52,7 +62,7 @@ function($scope, Web3Service, MeDao, MiniMeToken, Matriarch, Congress, IpfsServi
 
         MeDao.getMaxTokenSupply().then(
         function(max){
-            $scope.maxTokenSupply = max;//web3.fromWei(max, 'ether');
+            $scope.maxTokenSupply = web3.fromWei(max, 'ether');
         });
 
         MeDao.getTransferState().then(
@@ -145,15 +155,6 @@ function($scope, Web3Service, MeDao, MiniMeToken, Matriarch, Congress, IpfsServi
         }).catch( function(err){
             console.error(err);
         });
-
-        MiniMeToken.getName(Web3Service.getCurrentAccount())
-        .then( function(name){
-            $scope.name = name;
-        }).catch( function(err){
-            console.error(err);
-        });
-
-        $scope.MMTAddress = MiniMeToken.getMMTAddress();
     };
     
 }]);

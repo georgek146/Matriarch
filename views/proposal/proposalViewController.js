@@ -16,7 +16,7 @@ function($scope,$location,MeDao,MiniMeToken,Web3Service,IpfsService,Matriarch,Co
     function(medaoAddress){
         MeDao.setMeDaoAddress(medaoAddress);
         
-        MeDao.getMMTAddress().then(
+        MeDao.getMMTAddress(medaoAddress).then(
         function(mmtAddress){
             MiniMeToken.setMMTAddress(mmtAddress);
 
@@ -27,7 +27,7 @@ function($scope,$location,MeDao,MiniMeToken,Web3Service,IpfsService,Matriarch,Co
                 console.error(err);
             });
 
-            MiniMeToken.getName(Web3Service.getCurrentAccount())
+            MiniMeToken.getName(mmtAddress)
             .then( function(name){
                 $scope.name = name;
             }).catch( function(err){
@@ -56,7 +56,7 @@ function($scope,$location,MeDao,MiniMeToken,Web3Service,IpfsService,Matriarch,Co
                 $scope.rejected = proposal[5];
                 var support = web3.fromWei(proposal[7],'ether').toNumber();
                 var against = web3.fromWei(proposal[8],'ether').toNumber();
-                console.log(support,against);
+                //console.log(support,against);
                 $scope.support = 0;
 
                 if((support+against) > 0){
@@ -64,10 +64,10 @@ function($scope,$location,MeDao,MiniMeToken,Web3Service,IpfsService,Matriarch,Co
                     var percent = support/total;
                     $scope.support = Math.round(percent*100);
 
-                    console.log(total, percent, $scope.support);
+                    //console.log(total, percent, $scope.support);
                 }
                 $scope.against = 100 - $scope.support;
-                console.log(support,against, $scope.support, $scope.against);
+                //console.log(support,against, $scope.support, $scope.against);
 
                 IpfsService.getIpfsData(proposal[1]).then(
                 function(data){

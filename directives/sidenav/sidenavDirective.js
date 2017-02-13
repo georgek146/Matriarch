@@ -1,5 +1,5 @@
-Matriarch.directive('sidenav', ['$mdSidenav','$location','Web3Service','Matriarch',
-function($mdSidenav, $location, Web3Service, Matriarch) {
+Matriarch.directive('sidenav', ['$mdSidenav','$location','Web3Service','Matriarch','MiniMeToken','MeDao',
+function($mdSidenav, $location, Web3Service, Matriarch, MiniMeToken, MeDao) {
 	return {
 		restrict: 'E',
 		scope: {
@@ -26,13 +26,29 @@ function($mdSidenav, $location, Web3Service, Matriarch) {
                 $location.url(url);
             };
             
+            setInterval(function(){
+                Web3Service.getEtherBalance().then(
+                function(balance){
+                    $scope.etherBalance = web3.fromWei(balance, 'ether').toFixed(3);
+                });
+                
+                Matriarch.getMeDaoAddress(Web3Service.getCurrentAccount()).then(
+                function(meDaoAddress){
+                    if(meDaoAddress !== '0x0000000000000000000000000000000000000000')
+                        $scope.deployed = true;    
+                    $scope.loaded = true;
+                }).catch(function(err){
+                    console.error(err);
+                });
+            }, 500);
+            
             Web3Service.getEtherBalance().then(
             function(balance){
                 $scope.etherBalance = web3.fromWei(balance, 'ether').toFixed(3);
             });
             
             $scope.$on('$routeChangeStart', function(next, current) { 
-                $scope.isDeployed.then(
+                Matriarch.getMeDaoAddress(Web3Service.getCurrentAccount()).then(
                 function(meDaoAddress){
                     if(meDaoAddress !== '0x0000000000000000000000000000000000000000')
                         $scope.deployed = true;    
@@ -42,9 +58,7 @@ function($mdSidenav, $location, Web3Service, Matriarch) {
                 });
             });
             
-            $scope.isDeployed = Matriarch.getMeDaoAddress(Web3Service.getCurrentAccount());
-    
-            $scope.isDeployed.then(
+            Matriarch.getMeDaoAddress(Web3Service.getCurrentAccount()).then(
             function(meDaoAddress){
                 if(meDaoAddress !== '0x0000000000000000000000000000000000000000')
                     $scope.deployed = true;    
@@ -66,14 +80,28 @@ function($mdSidenav, $location, Web3Service, Matriarch) {
             Matriarch.getTotalDaos().then(
             function(total){
                 for(var i = 0; i < total; i++){
-                    Matriarch.getIndex(i).then(
-                    function(ceo){
-                        $scope.medaos.push(ceo);
-                    });
+                    setMeDao(i);
                 }
             }).catch(function(err){
                 console.error(err);
             });
+            
+            var setMeDao = function(index){
+                var medaoCeo;
+                Matriarch.getIndex(index).then(
+                function(ceo){
+                    medaoCeo = ceo;
+                    return Matriarch.getMeDaoAddress(ceo);
+                }).then(function(medaoAddress){
+                    return MeDao.getMMTAddress(medaoAddress)
+                }).then(function(mmtAddress){
+                    return MiniMeToken.getName(mmtAddress);
+                }).then(function(name){
+                    $scope.medaos.push({ceo:medaoCeo,name:name});
+                }).catch(function(err){
+                    console.error(err);
+                });  
+            };
 		},
 		link : function($scope, $element, $attrs) {
             

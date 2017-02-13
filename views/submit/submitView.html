@@ -35,8 +35,12 @@
                 <md-input-container class="md-block">
                     <label>Description</label>
                     <textarea ng-model="proposal.description" md-maxlength="150000" rows="5" md-select-on-focus></textarea>
-                </md-input-container>                
-                <md-button ng-click="submitProposal()">Submit</md-button>
+                </md-input-container>
+                <div layout="row">
+                    <md-button ng-click="submitProposal()" ng-disabled="clicked">Submit</md-button>
+                    <span flex></span>
+                    <p ng-show="clicked">Submitting...</p>
+                </div>
             </md-card-content>
         </md-card>
         <md-card>

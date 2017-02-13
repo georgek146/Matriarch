@@ -1,4 +1,5 @@
-<div layomd-card>
+<div layout=column layout-padding="5">
+     <md-card>
             <md-card-title>
                 <md-card-title-text>
                     <span class="md-headline">Create Your MeDao</span>
@@ -18,10 +19,10 @@
                 </div>
                 <div layout="row">
                     <md-input-container>
-                        <md-switch class="md-primary" ng-disabled="true">show advanced options</md-switch>
+                        <md-switch class="md-primary" ng-disabled="true">show advanced options (coming soon)</md-switch>
                     </md-input-container>
                     <span flex></span>
-                    <md-button ng-click="deployMMT()">Deploy MeDao</md-button>
+                    <md-button ng-click="deployMMT()" ng-disabled="clicked">Deploy MeDao</md-button>
                 </div>
                 <div>
                     <small style="color:red">*Note: During the deploy process it will ask you to approve around six transactions but none will send ether</small>
@@ -30,7 +31,7 @@
         </md-card>
     </div>
     
-    <md-list-container>
+    <md-list-container ng-show="mmtAddress !== ''">
         <md-subheader>Deployment Progress</md-subheader>
         <div layout="row">
             <div layout="column" flex>

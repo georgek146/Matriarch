@@ -14,7 +14,7 @@ function($scope,$location,Congress,MiniMeToken,Web3Service,IpfsService,MeDao,Mat
     function(medaoAddress){
         MeDao.setMeDaoAddress(medaoAddress);
         
-        MeDao.getMMTAddress().then(
+        MeDao.getMMTAddress(medaoAddress).then(
         function(mmtAddress){
             MiniMeToken.setMMTAddress(mmtAddress);
             
@@ -25,8 +25,8 @@ function($scope,$location,Congress,MiniMeToken,Web3Service,IpfsService,MeDao,Mat
                 console.error(err);
             });
 
-            MiniMeToken.getName(Web3Service.getCurrentAccount())
-            .then( function(name){
+            MiniMeToken.getName(mmtAddress).then(
+            function(name){
                 $scope.name = name;
             }).catch( function(err){
                 console.error(err);
@@ -40,13 +40,6 @@ function($scope,$location,Congress,MiniMeToken,Web3Service,IpfsService,MeDao,Mat
                 if($scope.currentTokenSupply > 0)
                     $scope.percentCurrentSupply = Math.round($scope.totalLocked/$scope.currentTokenSupply*100);
 
-            });
-            
-            MiniMeToken.getName(Web3Service.getCurrentAccount())
-            .then( function(name){
-                $scope.name = name;
-            }).catch( function(err){
-                console.error(err);
             });
             
             MiniMeToken.getTokenBalance(Web3Service.getCurrentAccount()).then(

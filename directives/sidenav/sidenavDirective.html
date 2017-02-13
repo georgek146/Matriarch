@@ -18,12 +18,12 @@
             </md-list-container>
         </div>
     </div>
-    <div layout="column">
-        <h4>MeDaos</h4>
+    <div layout="column" flex>
+        <h4>Browse MeDaos</h4>
         <md-content layout="column" flex>
             <md-list-container>
-                <md-list-item ng-repeat="ceo in medaos" ng-click="goto('medao/' + ceo)">
-                    <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ceo}}</div>
+                <md-list-item data-ng-repeat="medao in medaos" ng-click="goto('medao/' + medao.ceo)">
+                    <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{medao.name}}</div>
                 </md-list-item>
             </md-list-container>
         </md-content>

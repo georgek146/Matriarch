@@ -58,9 +58,10 @@ function($q,Web3Service) {
             });
             return deferred.promise;
         },
-        getName: function(){
+        getName: function(mmtAddress){
             var deferred = $q.defer();
-            MiniMeToken.name(
+            var mmt = MiniMeToken_contract.at(mmtAddress);
+            mmt.name(
             function(err, name){
                 if(!err)
                     deferred.resolve(name);

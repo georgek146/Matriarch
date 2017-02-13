@@ -63,9 +63,10 @@ function ($q, Web3Service, MiniMeToken) {
             });
             return deferred.promise;
         },
-        getMMTAddress: function(){
+        getMMTAddress: function(medao){
             var deferred = $q.defer();
-            MeDao.tokens(function(err,mmtAddress){
+            var mmt = MeDao_contract.at(medao);
+            mmt.tokens(function(err,mmtAddress){
                 if(!err)
                     deferred.resolve(mmtAddress);
                 else

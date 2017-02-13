@@ -20,7 +20,12 @@ function($scope,$location,MeDao,MiniMeToken,Web3Service,IpfsService,Congress,Mat
         $location.url(url);
     };
     
+    $scope.clicked = false;
+    
     $scope.submitProposal = function(){
+        $scope.clicked = true;
+        
+        
         IpfsService.getIpfsHash(JSON.stringify($scope.proposal)).then(
         function(ipfsHash){
             return Congress.submitProposal($scope.proposal.action,ipfsHash,$scope.proposal.address,$scope.proposal.amount);
@@ -38,7 +43,7 @@ function($scope,$location,MeDao,MiniMeToken,Web3Service,IpfsService,Congress,Mat
     function(medaoAddress){
         MeDao.setMeDaoAddress(medaoAddress);
         
-        MeDao.getMMTAddress().then(
+        MeDao.getMMTAddress(medaoAddress).then(
         function(mmtAddress){
             MiniMeToken.setMMTAddress(mmtAddress);
 
@@ -49,7 +54,7 @@ function($scope,$location,MeDao,MiniMeToken,Web3Service,IpfsService,Congress,Mat
                 console.error(err);
             });
 
-            MiniMeToken.getName(Web3Service.getCurrentAccount())
+            MiniMeToken.getName(mmtAddress)
             .then( function(name){
                 $scope.name = name;
             }).catch( function(err){
