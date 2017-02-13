@@ -32,7 +32,12 @@ function ($q,$http) {
                 //console.log("fetching data from ipfs for", ipfsHash);
                 var post = ipfs.catJson(ipfsHash, function(err, ipfsData) {
                     if(err || !ipfsData){
-                        return getViaGateway(ipfsHash);
+                        getViaGateway(ipfsHash).then(
+                        function(ipfsData){
+                            deferred.resolve(ipfsData);
+                        }).catch(function(err){
+                            deferred.reject(err);
+                        });
                     } else {
                         localStorage.setItem(ipfsHash,JSON.stringify(ipfsData));
                         deferred.resolve(ipfsData);
