@@ -18,9 +18,9 @@ Matriarch.config(function ($routeProvider) {
         templateUrl: 'views/congress/congressView.html',
         controller: 'CongressViewController'
     }).
-    when('/medao/:address/submit', {
-        templateUrl: 'views/submit/submitView.html',
-        controller: 'SubmitViewController'
+    when('/medao/:address/finance', {
+        templateUrl: 'views/finance/financeView.html',
+        controller: 'FinanceViewController'
     }).
     when('/medao/:address/proposal/:id', {
         templateUrl: 'views/proposal/proposalView.html',

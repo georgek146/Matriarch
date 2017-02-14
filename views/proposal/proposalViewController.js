@@ -71,8 +71,10 @@ function($scope,$location,MeDao,MiniMeToken,Web3Service,IpfsService,Matriarch,Co
 
                 IpfsService.getIpfsData(proposal[1]).then(
                 function(data){
-                    if(typeof data !== 'object')
+                    console.log(data);
+                    if(typeof data == 'string')
                         data = JSON.parse(data);
+                    console.log(data);
                     $scope.proposal = {
                         action: web3.toAscii(proposal[0]),
                         hash: proposal[1],

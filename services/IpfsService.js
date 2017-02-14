@@ -13,9 +13,7 @@ function ($q,$http) {
             // this callback will be called asynchronously
             // when the response is available
             console.log('Fetching from gateway!', response);
-            var notparsed = response.data;
-            var parsed = JSON.parse(notparsed);
-            deferred.resolve(parsed);
+            deferred.resolve(JSON.parse(response.data));
         }, function errorCallback(err) {
             // called asynchronously if an error occurs
             // or server returns response with an error status.
@@ -31,22 +29,25 @@ function ($q,$http) {
             
             var local = localStorage.getItem(ipfsHash);
             if(!local){
-                //console.log("fetching data from ipfs for", ipfsHash);
+                console.log("fetching data from ipfs for", ipfsHash);
                 var post = ipfs.catJson(ipfsHash, function(err, ipfsData) {
                     if(err || !ipfsData){
                         getViaGateway(ipfsHash).then(
-                        function(ipfsHash){
-                            deferred.resolve(ipfsHash);
+                        function(ipfsData){
+                            console.log(ipfsData);
+                            deferred.resolve(ipfsData);
                         }).catch(function(err){
                             deferred.reject(err);
                         });
                     } else {
                         localStorage.setItem(ipfsHash,JSON.stringify(ipfsData));
+                        console.log(ipfsData);
                         deferred.resolve(ipfsData);
                     }
                 });
             } else {
                 //console.log('Found ipfs data in localStorage');
+                console.log(local);
                 deferred.resolve(JSON.parse(local));
             }
             

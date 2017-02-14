@@ -47,13 +47,25 @@ function ($q, Web3Service) {
         },
         updateDescription: function(hash) {
             var deferred = $q.defer();
-            Matriarch.registerMeDao(address, {from:Web3Service.getCurrentAccount()}, 
+            Matriarch.updateDescriptionHash(hash, {from:Web3Service.getCurrentAccount()}, 
             function(err, txHash) {
                 if(err)
                     deferred.reject(err);
                 else
                     deferred.resolve(txHash);
                     
+            });
+            return deferred.promise;
+        },
+        getDescriptionHash: function(address) {
+            var deferred = $q.defer();
+            Matriarch.meDaos(address,
+            function(err, dao) {
+                console.log(dao);
+                if(err)
+                    deferred.reject(err);
+                else
+                    deferred.resolve(dao[2]);
             });
             return deferred.promise;
         },

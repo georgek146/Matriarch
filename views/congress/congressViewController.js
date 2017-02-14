@@ -2,6 +2,9 @@ Matriarch.controller('CongressViewController', ['$scope','$location','Congress',
 function($scope,$location,Congress,MiniMeToken,Web3Service,IpfsService,MeDao,Matriarch){
     console.log('Loading Congress View');
     
+    $scope.show = false;
+    $scope.submitText = 'Submit Proposal';
+    
     var url = $location.url();
     var array = url.split('/');
     $scope.currentAccount = array[2].toLowerCase();
@@ -35,11 +38,6 @@ function($scope,$location,Congress,MiniMeToken,Web3Service,IpfsService,MeDao,Mat
             MiniMeToken.getCurrentTokenSupply().then(
             function(supply){
                 $scope.currentTokenSupply = supply;
-
-                $scope.percentCurrentSupply = 0;
-                if($scope.currentTokenSupply > 0)
-                    $scope.percentCurrentSupply = Math.round($scope.totalLocked/$scope.currentTokenSupply*100);
-
             });
             
             MiniMeToken.getTokenBalance(Web3Service.getCurrentAccount()).then(
@@ -85,17 +83,36 @@ function($scope,$location,Congress,MiniMeToken,Web3Service,IpfsService,MeDao,Mat
             }).catch(function(err){
                 console.error(err);
             });
-
-            Congress.getTotalProposals().then(
-            function(total){
-                $scope.total_proposals = total.toNumber();
-            }).catch(function(err){
-                console.error(err);
-            });
         }).catch(function(err){
             console.error(err);
         });
     }).catch(function(err){
         console.error(err);
     });
+    
+    $scope.options = ['Ongoing','updateMeDao','createCloneToken','generateTokens'];
+    $scope.proposal = {
+        action: null,
+        title: null,
+        description: null,
+        address: null,
+        amount: null,
+    };
+    
+    $scope.clicked = false;
+    $scope.submitProposal = function(){
+        $scope.clicked = true;
+        
+        IpfsService.getIpfsHash(JSON.stringify($scope.proposal)).then(
+        function(ipfsHash){
+            return Congress.submitProposal($scope.proposal.action,ipfsHash,$scope.proposal.address,$scope.proposal.amount);
+        }).then(function(txHash){
+            Web3Service.getTransactionReceipt(txHash).then(
+            function(receipt){
+                $scope.goto('medao/'+ $scope.currentAccount + '/proposal/' + ($scope.total_proposals-1));
+            });
+        }).catch(function(err){
+            console.error(err);
+        });
+    };
 }]);

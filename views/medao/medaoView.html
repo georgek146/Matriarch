@@ -4,7 +4,7 @@
             <md-card>
                 <md-card-title>
                     <md-card-title-text>
-                        <span layout="row" class="md-headline">{{name | capitalize}}<span flex></span><small>{{actions.sell.max}} {{symbol}} owned</small></span>
+                        <span layout="row" class="md-headline">{{name | capitalize}}<span flex></span><small>({{symbol}})</small></span>
                     </md-card-title-text>
                 </md-card-title>
             </md-card>
@@ -18,183 +18,70 @@
                 <p class="md-secondary">{{currentAccount}}</p>
             </md-list-item>
             <md-list-item class="secondary-button-padding">
-                <p>vault</p>
-                <p class="md-secondary">{{vault}}</p>
-            </md-list-item>
-            <md-list-item class="secondary-button-padding">
                 <p>curator</p>
                 <p class="md-secondary">{{curator}}</p>
-            </md-list-item>
-            <md-list-item class="secondary-button-padding">
-                <p>Max Token Supply</p>
-                <p class="md-secondary">{{maxTokenSupply}}</p>
-            </md-list-item>
-            <md-list-item class="secondary-button-padding">
-                <p>Current Token Supply</p>
-                <p class="md-secondary">{{currentTokenSupply}}</p>
             </md-list-item>
         </md-list>
 
         <md-divider></md-divider>
     
-        <div layout="row"><span flex></span><md-button ng-click="goto('medao/' + currentAccount + '/congress')">View Congress</md-button></div>
-
-        <md-divider></md-divider>
-
         <div layout="row">
-            <md-card ng-if="maxTokenSupply > currentTokenSupply" flex>
-                <md-card-title>
-                    <md-card-title-text>
-                        <span class="md-headline" layout="row"> Initial Coin Offering (ICO) </span>
-                    </md-card-title-text>
-                </md-card-title>
-                <md-card-content layout="column">
-                    <p>{{name | capitalize}} has a maximum supply of {{maxTokenSupply}} {{symbol}} and can be divided down to {{decimals}} decimal places. Users can choose to lock {{symbol}} in return for the ability to vote on proposals. A voters weight is directly proportional to their {{symbol}} balance. <small><a style="color:blue" href="https://github.com/ChicoBitcoinJoe/Matriarch"> learn more </a></small></p>
-                    <span layout layout-align="center" flex><small>1 ether = 1 {{symbol}}</small></span>
-                    <span layout="row">
-                        <md-input-container class="skinny-container" flex>
-                            <label>Amount</label>
-                            <input ng-model="actions.buy.ico">
+            <p>View: </p>
+            <md-button ng-click="goto('medao/' + currentAccount + '/finance')">Finances</md-button>
+            <md-button ng-click="goto('medao/' + currentAccount + '/congress')">Congress</md-button>
+            <div ng-show="currentAccount == loggedInAccount" layout="row" flex>
+                <span flex></span>
+                <p>Admin: &nbsp&nbsp&nbsp </p>
+                <md-button ng-click="editDescription = !editDescription">Update Description</md-button>
+            </div>
+        </div>
+    
+        <md-divider></md-divider>
+        
+        <div ng-show="editDescription" layout="row">
+            <div flex>
+                <md-card>
+                    <md-card-content layout="column">
+                        <md-input-container class="md-block">
+                          <label>New Description</label>
+                          <textarea ng-model="newDescription.text" md-maxlength="150000" rows="5" md-select-on-focus></textarea>
                         </md-input-container>
-                        <p layout="column">
-                            <span flex></span>
-                            &nbsp{{symbol}}
-                        </p>   
-                    </span>
-                    <span layout="row">
-                        <md-button flex ng-click="actions.buy.ico = actions.buy.max">max</md-button>
-                        <md-button flex ng-click="buyICOTokens(actions.buy.ico)">Buy</md-button>
-                    </span>
-                </md-card-content>
-            </md-card>
-
-            <md-card flex>
-                <md-card-title>
-                    <md-card-title-text>
-                        <span class="md-headline">Transfer {{symbol | capitalize}}</span>
-                    </md-card-title-text>
-                </md-card-title>
-                <md-card-content layout="column">
-                    <md-input-container class="skinny-container">
-                        <label>To</label>
-                        <input type="text" placeholder="0x1a4k..." ng-model="actions.transfer.to">
-                    </md-input-container>
-                    <span layout="row">
-                        <md-input-container class="skinny-container" flex>
-                            <label>Amount</label>
-                            <input ng-model="actions.transfer.amount">
-                        </md-input-container>
-                        <p>
-                            {{symbol}}
-                        </p>
-                    </span>
-                    <span layout="row">
-                        <md-button flex ng-click="actions.transfer.amount = actions.sell.max">max</md-button>
-                        <md-button flex ng-click="transfer(actions.transfer.to, actions.transfer.amount)" ng-disabled="{{transfersAllowed}}">Transfer</md-button>
-                    </span>
-                </md-card-content>
-            </md-card>
+                        <md-button ng-click="setDescription()">Set Description</md-button>
+                    </md-card-content>
+                </md-card>
+            </div>
         </div>
         
-        <md-divider></md-divider>
+        <md-divider ng-show="editDescription" ></md-divider>
         
-        <div id="trade" layout="row">
-            <md-card flex>
-                <md-card-title>
-                    <md-card-title-text>
-                        <span class="md-headline">Buy {{symbol | capitalize}} <span flex></span><small>(demo)</small></span>
-                    </md-card-title-text>
-                </md-card-title>
-                <md-card-content layout="column">
-                    <span layout="row">
-                        <md-input-container class="skinny-container" flex>
-                            <label>Amount</label>
-                            <input ng-model="actions.buy.token">
-                        </md-input-container>
-                        <div>
-                            eth
-                        </div>
-                    </span>
-                    <span layout="row">
-                        <span flex></span>
-                        <span>
-                            <small>
-                                The best buy price available is (2.00 arc/eth) with 
-                                <span style="color:blue; cursor: pointer; cursor: hand;" ng-click="actions.buy.token = 1"> 1 {{symbol}} </span> 
-                                available
-                            </small>
-                        </span>
-                    </span>
-                    <span ng-show="actions.buy.token > 0" layout="row">
-                        <span flex></span>
-                        <span>
-                            <small>
-                                {{actions.buy.token}} ether will buy a total of 
-                                <span ng-show="actions.buy.token <= 1">
-                                    {{actions.buy.token * 2}} {{symbol}}
-                                    (2 arc/eth)
-                                </span>
-                                <span ng-show="actions.buy.token > 1">
-                                    {{(actions.buy.token*1 + 1)}} {{symbol}}
-                                    ({{ (action.buy.token + 1)/actions.buy.token + 1}} arc/eth)
-                                </span>
-                            </small>
-                        </span>
-                    </span>
-                    <span layout="row">
-                        <md-button flex ng-click="actions.buy.token = actions.buy.max">max</md-button>
-                        <md-button flex ng-disabled="true">Buy</md-button>
-                    </span>
-                </md-card-content>
-            </md-card>
-            <md-card flex>
-                <md-card-title>
-                    <md-card-title-text>
-                        <span class="md-headline">Sell {{symbol | capitalize}} <span flex></span><small>(demo)</small></span>
-                    </md-card-title-text>
-                </md-card-title>
-                <md-card-content layout="column">
-                    <span layout="row">
-                        <md-input-container class="skinny-container" flex>
-                            <label>Amount</label>
-                            <input ng-model="actions.sell.token">
-                        </md-input-container>
-                        <p layout="column">
-                            <span flex></span>
-                            Ether
-                        </p>
-                    </span>
-                    <span layout="row">
-                        <span flex></span>
-                        <span>
-                            <small>
-                                The best sell price available is (1.95 arc/eth) with 
-                                <span style="color:blue; cursor: pointer; cursor: hand;" ng-click="actions.sell.token = 0.25"> 0.25 Ether </span> 
-                                worth available
-                            </small>
-                        </span>
-                    </span>
-                    <span ng-show="actions.sell.token > 0" layout="row">
-                        <span flex></span>
-                        <span>
-                            <small>
-                                <span ng-show="actions.sell.token <= 0.25">
-                                {{actions.sell.token}} {{symbol}} will sell for a total of 
-                                    {{actions.sell.token / 1.95}} ether
-                                    (1.95 arc/eth)
-                                </span>
-                                <span style="color:red" ng-show="actions.sell.token > 0.25">
-                                    *Unfortunately there are not enough buyers to sell {{actions.sell.token}} {{symbol}}!
-                                </span>
-                            </small>
-                        </span>
-                    </span>
-                    <span layout="row">
-                        <md-button flex ng-click="actions.sell.token = actions.sell.max">max</md-button>
-                        <md-button flex ng-disabled="true">Sell</md-button>
-                    </span>
-                </md-card-content>
-            </md-card>
+        <div ng-show="editDescription" layout="row">
+            <div flex>
+                <md-card>
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline" layout="row">Description</span>
+                        </md-card-title-text>
+                    </md-card-title>
+                    <md-card-content layout="column">
+                        <div ng-bind-html="newDescription.marked"></div>
+                    </md-card-content>
+                </md-card>
+            </div>
+        </div>
+        
+        <div ng-hide="editDescription" layout="row">
+            <div flex>
+                <md-card>
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline" layout="row">Description</span>
+                        </md-card-title-text>
+                    </md-card-title>
+                    <md-card-content layout="column">
+                        <div ng-bind-html="description"></div>
+                    </md-card-content>
+                </md-card>
+            </div>
         </div>
     </div>
 </div>

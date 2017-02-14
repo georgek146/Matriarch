@@ -1,4 +1,4 @@
-<div class="md-whiteframe-4dp" layout="column" layout-padding="1" flex>
+<div class="md-whiteframe-4dp" layout="column" flex>
     <md-toolbar layout="column" layout-padding="1">
         <h2 >
             <a href="#home">Matriarch</a>
@@ -7,26 +7,28 @@
             </div>
         </h2>
     </md-toolbar>
-    <div layout="column">
-        <h4>Menu</h4>
-        <div>
-            <md-list-container>
-                <md-list-item ng-show="loaded && !deployed" ng-click="goto('deploy')">Deploy Your MeDao</md-list-item>
-                <md-list-item ng-show="deployed" ng-click="goto('medao/' + currentAccount)">My Dao</md-list-item>
-                <md-list-item ng-show="deployed" ng-click="goto('medao/' + currentAccount + '/congress')">- &nbsp&nbsp Congress</md-list-item>
-                <md-list-item ng-show="deployed" ng-click="goto('medao/' + currentAccount + '/submit')">- &nbsp&nbsp Submit Proposal</md-list-item>
-            </md-list-container>
+    <div layout="column" layout-padding="1" flex>
+        <div layout="column">
+            <h4>Menu</h4>
+            <div>
+                <md-list-container>
+                    <md-list-item ng-show="loaded && !deployed" ng-click="goto('deploy')">Deploy Your MeDao</md-list-item>
+                    <md-list-item ng-show="deployed" ng-click="goto('medao/' + currentAccount)">My Dao</md-list-item>
+                    <md-list-item ng-show="deployed" ng-click="goto('medao/' + currentAccount + '/finance')">- &nbsp&nbsp Finance</md-list-item>
+                    <md-list-item ng-show="deployed" ng-click="goto('medao/' + currentAccount + '/congress')">- &nbsp&nbsp Congress</md-list-item>
+                </md-list-container>
+            </div>
         </div>
-    </div>
-    <div layout="column" flex>
-        <h4>Browse MeDaos</h4>
-        <md-content layout="column" flex>
-            <md-list-container>
-                <md-list-item data-ng-repeat="medao in medaos" ng-click="goto('medao/' + medao.ceo)">
-                    <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{medao.name}}</div>
-                </md-list-item>
-            </md-list-container>
-        </md-content>
+        <div layout="column" flex>
+            <h4>Browse MeDaos</h4>
+            <md-content layout="column" flex>
+                <md-list-container>
+                    <md-list-item data-ng-repeat="medao in medaos" ng-click="goto('medao/' + medao.ceo)">
+                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{medao.name}}</div>
+                    </md-list-item>
+                </md-list-container>
+            </md-content>
+        </div>
     </div>
     <footer></footer>
 </div>

@@ -9,5 +9,5 @@ Matriarch is my implementation of a DAO layer on top of an erc-20 compliant toke
     - [Metamask - chrome extension](https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn) (recommended)
     - [Mist - web3 compatible browser](https://github.com/ethereum/mist/releases) (medium)
     - [Geth - locally hosted web3 client](https://github.com/ethereum/go-ethereum/wiki/Building-Ethereum) (hard)
-2. To submit a proposal you must host the proposal data yourself using an IPFS node. Eventually something like filecoin will be used.
+2. To submit a proposal you must host the proposal data yourself using an [IPFS](https://ipfs.io/) node. Eventually something like filecoin will be used.
 3. Go to the [Matriarch testnet webpage](http://matriarch-testnet.azurewebsites.net/)
