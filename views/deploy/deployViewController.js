@@ -152,11 +152,6 @@ function($scope, $location, Web3Service, MeDao, MiniMeToken, Matriarch, Congress
         console.log('Deploying MeDao', $scope.medao);
         $scope.medaoAddress = 'Deploying';
         
-        for(var i = 0; i < $scope.minimetoken.decimals; i++)
-            $scope.medao.maxSupply *= 10;
-        
-        console.log($scope.medao.maxSupply);
-        
         var contract = web3.eth.contract(JSON.parse(medao.abi));
         var contractInstance = contract.new(
         $scope.medao.ceo,
@@ -164,11 +159,11 @@ function($scope, $location, Web3Service, MeDao, MiniMeToken, Matriarch, Congress
         $scope.medao.vault,
         $scope.medao.minimeToken,
         $scope.medao.congress,
-        $scope.medao.maxSupply,
+        web3.toWei($scope.medao.maxSupply, 'ether'),
         {
             from: web3.eth.accounts[0],
             data: medao.bytecode
-        }, 
+        },
         function (err, contract){
             console.log(contract);
             if (typeof contract.address !== 'undefined') {

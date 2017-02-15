@@ -78,6 +78,7 @@ function($scope, Web3Service, MeDao, MiniMeToken, Matriarch, Congress, IpfsServi
             
             MeDao.getMaxTokenSupply().then(
             function(max){
+                console.log(max);
                 $scope.maxTokenSupply = web3.fromWei(max, 'ether');
             });
 
