@@ -110,11 +110,11 @@ function($scope,$location,Congress,MiniMeToken,Web3Service,IpfsService,MeDao,Mat
     $scope.$watch('proposal', function() {
         console.log($scope.disabled);
         $scope.disabled = false;
-        if(proposal.action == null)
+        if($scope.proposal.action == null)
             $scope.disabled = true;
-        if(proposal.title == null)
+        if($scope.proposal.title == null)
             $scope.disabled = true;
-        if(proposal.description == null)
+        if($scope.proposal.description == null)
             $scope.disabled = true;
         
         if($scope.proposal.action == 'generateTokens'){

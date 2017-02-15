@@ -112,24 +112,17 @@ function($scope, Web3Service, MeDao, MiniMeToken, Matriarch, Congress, IpfsServi
     };
 
     $scope.buyICOTokens = function(amount) {
-        if($scope.maxTokenSupply <= $scope.currentTokenSupply)
-            return false;
-
-        var transactionObject = {from: Web3Service.getCurrentAccount(), 
-                                 to: MiniMeToken.getMMTAddress(),
-                                 value: web3.toWei(amount, 'ether'),
-                                 gas: 300000};
+        var transactionObject = {
+            from: Web3Service.getCurrentAccount(), 
+            to: MiniMeToken.getMMTAddress(),
+            value: web3.toWei(amount, 'ether')
+        };
 
         console.log(transactionObject);
-
-        web3.eth.estimateGas(transactionObject, function(err, gas){
-            console.log(err,gas); 
-            transactionObject.gas = Math.round(gas*1.1);
-            web3.eth.sendTransaction(transactionObject,
-            function(err,address){
-                console.log(err,address);
-            });
-        });                               
+        web3.eth.sendTransaction(transactionObject,
+        function(err,address){
+            console.log(err,address);
+        });                              
     };
 
     $scope.transfer = function(to,amount) {

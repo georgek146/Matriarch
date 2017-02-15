@@ -6,32 +6,69 @@
                 </md-card-title-text>
             </md-card-title>
             <md-card-content>
-                <div layout="row">
-                    <md-input-container flex>
-                        <label>Token Name</label>
-                        <input ng-model="minimetoken.tokenName">
-                    </md-input-container>
-                    <md-divider style="margin:15px;"></md-divider>
-                    <md-input-container>
-                        <label>Token Symbol</label>
-                        <input ng-model="minimetoken.tokenSymbol" md-maxlength="3">
-                    </md-input-container>
+                <div ng-show="!clicked">
+                    <div layout="row">
+                        <md-input-container flex>
+                            <label>Token Name</label>
+                            <input ng-model="minimetoken.tokenName">
+                        </md-input-container>
+                        <md-divider style="margin:15px;"></md-divider>
+                        <md-input-container>
+                            <label>Token Symbol</label>
+                            <input ng-model="minimetoken.tokenSymbol" md-maxlength="3">
+                        </md-input-container>
+                    </div>
+                    <div ng-show="advanced">
+                        <div>
+                            <md-input-container class="md-block">
+                                <label>Curator</label>
+                                <input ng-model="medao.curator"
+                            </md-input-container>
+                        </div>
+                        <div>
+                            <md-input-container class="md-block">
+                                <label>Vault</label>
+                                <input ng-model="medao.vault"
+                            </md-input-container>
+                        </div>
+                        <div>
+                            <md-input-container class="md-block">
+                                <label>Max Supply</label>
+                                <input ng-model="medao.maxSupply"
+                            </md-input-container>
+                        </div>
+                        <div>
+                            <md-input-container class="md-block">
+                                <label>Decimals (0-24)</label>
+                                <input type="number" ng-model="minimetoken.decimals" min="0" max="24">
+                            </md-input-container>
+                        </div>
                 </div>
+                        
+                <md-divider></md-divider>
+                </div>
+                        
+                <h3 layout="row" layout-padding="5">
+                    {{minimetoken.tokenName}} <span flex></span> {{ medao.maxSupply }}.{{decimals}} {{minimetoken.tokenSymbol}}
+                </h3>
+                        
                 <div layout="row">
                     <md-input-container>
-                        <md-switch class="md-primary" ng-disabled="true">show advanced options (coming soon)</md-switch>
+                        <md-switch class="md-primary" ng-disabled="false" ng-model="advanced">show advanced options</md-switch>
                     </md-input-container>
                     <span flex></span>
                     <md-button ng-click="deployMMT()" ng-disabled="clicked">Deploy MeDao</md-button>
                 </div>
+                        
                 <div>
                     <small style="color:red">*Note: During the deploy process it will ask you to approve around six transactions but none will send ether</small>
                 </div>
+                        
             </md-card-content>
         </md-card>
     </div>
     
-    <md-list-container ng-show="mmtAddress !== ''">
+    <md-list-container ng-show="clicked">
         <md-subheader>Deployment Progress</md-subheader>
         <div layout="row">
             <div layout="column" flex>
