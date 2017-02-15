@@ -90,18 +90,48 @@ function($scope,$location,Congress,MiniMeToken,Web3Service,IpfsService,MeDao,Mat
         console.error(err);
     });
     
-    $scope.options = ['Ongoing','updateMeDao','createCloneToken','generateTokens'];
+    $scope.options = ['Ongoing','updateMeDao','generateTokens'];
     $scope.proposal = {
         action: null,
         title: null,
-        description: null,
+        description: '**Markdown** is *supported!*',
         address: null,
         amount: null,
     };
     
-    $scope.clicked = false;
+    $scope.description = {};
+    $scope.description.marked = marked($scope.proposal.description);
+    
+    $scope.$watch('proposal.description', function() {
+        $scope.description.marked = marked($scope.proposal.description);
+    });
+    
+    $scope.disabled = true;
+    $scope.$watch('proposal', function() {
+        console.log($scope.disabled);
+        $scope.disabled = false;
+        if(proposal.action == null)
+            $scope.disabled = true;
+        if(proposal.title == null)
+            $scope.disabled = true;
+        if(proposal.description == null)
+            $scope.disabled = true;
+        
+        if($scope.proposal.action == 'generateTokens'){
+            if(proposal.address == null)
+                $scope.disabled = true;
+            if(proposal.amount == null)
+                $scope.disabled = true;
+        }
+        
+        if($scope.proposal.action == 'updateMeDao'){
+            if(proposal.address == null)
+                $scope.disabled = true;
+        }
+    });
+    
     $scope.submitProposal = function(){
-        $scope.clicked = true;
+        $scope.disabled = true;
         
         IpfsService.getIpfsHash(JSON.stringify($scope.proposal)).then(
         function(ipfsHash){

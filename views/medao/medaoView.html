@@ -26,12 +26,12 @@
         <md-divider></md-divider>
     
         <div layout="row">
-            <p>View: </p>
+            <md-button ng-disabled="true">View:</md-button>
             <md-button ng-click="goto('medao/' + currentAccount + '/finance')">Finances</md-button>
             <md-button ng-click="goto('medao/' + currentAccount + '/congress')">Congress</md-button>
             <div ng-show="currentAccount == loggedInAccount" layout="row" flex>
                 <span flex></span>
-                <p>Admin: &nbsp&nbsp&nbsp </p>
+                <md-button ng-disabled="true">Admin:</md-button>
                 <md-button ng-click="editDescription = !editDescription">Update Description</md-button>
             </div>
         </div>

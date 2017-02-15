@@ -89,7 +89,7 @@ function($scope,$location,MeDao,MiniMeToken,Web3Service,IpfsService,Matriarch,Co
                         against: against,
                         totalVoters: proposal[9].toNumber(),
                         title: data.title,
-                        description: data.description
+                        description: marked(data.description)
                     };
                 });
             });

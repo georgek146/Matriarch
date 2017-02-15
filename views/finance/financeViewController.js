@@ -16,6 +16,11 @@ function($scope, Web3Service, MeDao, MiniMeToken, Matriarch, Congress, IpfsServi
         if(meDaoAddress !== '0x0000000000000000000000000000000000000000'){
             MeDao.setMeDaoAddress(meDaoAddress);
             
+            MeDao.getVault(meDaoAddress).then(
+            function(vaultAddress){
+                $scope.vault = vaultAddress;    
+            });
+            
             MeDao.getMMTAddress(meDaoAddress).then(
             function(mmtAddress){
                 MiniMeToken.setMMTAddress(mmtAddress);

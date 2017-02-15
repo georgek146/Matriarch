@@ -31,18 +31,17 @@
         </md-list>
 
         <md-divider></md-divider>
-    
+        
         <div layout="row">
-            <p>View: </p>
+            <md-button ng-disabled="true">View:</md-button>
             <md-button ng-click="goto('medao/' + currentAccount)">MeDao</md-button>
             <md-button ng-click="goto('medao/' + currentAccount + '/congress')">Congress</md-button>
-            <span flex></span>
         </div>
 
         <md-divider></md-divider>
 
         <div layout="row">
-            <md-card ng-if="maxTokenSupply > currentTokenSupply" flex>
+            <md-card ng-hide="currentTokenSupply >= 1000000" flex>
                 <md-card-title>
                     <md-card-title-text>
                         <span class="md-headline" layout="row"> Initial Coin Offering (ICO) </span>

@@ -23,9 +23,10 @@ function ($q, Web3Service, MiniMeToken) {
             });
             return deferred.promise;
         },
-        getVault: function(){
+        getVault: function(medaoAddress){
             var deferred = $q.defer();
-            MeDao.vault(function(err,vault){
+            var medao = MeDao_contract.at(medaoAddress);
+            medao.vault(function(err,vault){
                 if(!err)
                     deferred.resolve(vault);
                 else
@@ -63,10 +64,10 @@ function ($q, Web3Service, MiniMeToken) {
             });
             return deferred.promise;
         },
-        getMMTAddress: function(medao){
+        getMMTAddress: function(medaoAddress){
             var deferred = $q.defer();
-            var mmt = MeDao_contract.at(medao);
-            mmt.tokens(function(err,mmtAddress){
+            var medao = MeDao_contract.at(medaoAddress);
+            medao.tokens(function(err,mmtAddress){
                 if(!err)
                     deferred.resolve(mmtAddress);
                 else

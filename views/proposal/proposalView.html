@@ -11,6 +11,15 @@
         
     <md-divider></md-divider>
     
+    <div layout="row">
+        <md-button ng-disabled="true">View:</md-button>
+        <md-button ng-click="goto('medao/' + currentAccount)">MeDao</md-button>
+        <md-button ng-click="goto('medao/' + currentAccount + '/finance')">Finances</md-button>
+        <md-button ng-click="goto('medao/' + currentAccount + '/congress')">Congress</md-button>
+    </div>
+    
+    <md-divider></md-divider>
+    
     <md-list>
         <md-subheader class="md-no-sticky">Proposal Details</md-subheader>
         <md-list-item class="secondary-button-padding">
@@ -58,7 +67,7 @@
                 </md-card-title-text>
             </md-card-title>
             <md-card-content>
-                {{proposal.description}}
+                <div ng-bind-html="proposal.description"></div>
             </md-card-content>
         </md-card>
     </div>
