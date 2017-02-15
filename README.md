@@ -11,3 +11,4 @@ Matriarch is my implementation of a DAO layer on top of an erc-20 compliant toke
     - [Geth - locally hosted web3 client](https://github.com/ethereum/go-ethereum/wiki/Building-Ethereum) (hard)
 2. To submit a proposal you must host the proposal data yourself using an [IPFS](https://ipfs.io/) node. Eventually something like filecoin will be used.
 3. Go to the [Matriarch testnet webpage](http://matriarch-testnet.azurewebsites.net/)
+4. (Optional) Clone this repo and run it with your own server such as the python simpleHTTPserver
