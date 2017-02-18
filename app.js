@@ -59,7 +59,6 @@ Matriarch.filter('capitalize', function() {
 
 Matriarch.filter('decimals', [function() {
     return function(value, decimals) {
-        console.log(value,decimals);
         return parseFloat(value).toFixed(decimals);
     };
 }]);

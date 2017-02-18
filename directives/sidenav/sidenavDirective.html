@@ -1,38 +1,33 @@
-<div class="md-whiteframe-4dp" layout="column" flex>
-    <md-toolbar layout="column" layout-padding="1">
-        <h1>
-            <a href="#home">Matriarch</a>
-        </h1>
+<div layout="column" style="min-height:560px" flex>
+    <div style="background-color:rgba(133,33,33,1); color: rgba(255,255,255,0.87); min-height:120px;" layout="column" layout-padding="1">
+        <h1 style="margin-top:10px;margin-bottom:10px;"><a href="#home">Matriarch</a></h1>
         <div style="display:block; max-width:320px; overflow:hidden; white-space:nowrap; text-overflow:ellipsis; font-size:16px;">
             {{etherBalance | decimals:4}} eth &nbsp&nbsp&nbsp Logged in as: {{currentAccount}}
         </div>
-    </md-toolbar>
-    <div layout="column" layout-padding="1" flex>
-        <div layout="column">
-            <h4>Menu</h4>
-            <div>
-                <md-list-container>
-                    <md-list-item ng-show="loaded && !deployed" ng-click="goto('deploy')">Deploy Your MeDao</md-list-item>
-                    <md-list-item ng-show="deployed" ng-click="goto('medao/' + currentAccount)" class="secondary-button-padding">
-                        My Dao
-                        <md-button style="text-transform:none; font-size:12px; color:grey;" class="md-secondary" ng-click="goto('medao/' + currentAccount + '/admin')">settings</md-button>
-                    </md-list-item>
-                    <md-list-item ng-show="deployed" ng-click="goto('medao/' + currentAccount + '/finance')">- &nbsp&nbsp Finance</md-list-item>
-                    <md-list-item ng-show="deployed" ng-click="goto('medao/' + currentAccount + '/congress')">- &nbsp&nbsp Congress</md-list-item>
-                    <md-list-item ng-show="deployed" ng-click="goto('medao/' + currentAccount + '/clones')">- &nbsp&nbsp Clones (coming soon)</md-list-item>
-                </md-list-container>
-            </div>
-        </div>
-        <div layout="column" flex>
-            <h4>Browse MeDaos</h4>
-            <md-content layout="column" flex>
-                <md-list-container>
-                    <md-list-item data-ng-repeat="medao in medaos" ng-click="goto('medao/' + medao.ceo)">
-                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{medao.name}}</div>
-                    </md-list-item>
-                </md-list-container>
-            </md-content>
-        </div>
     </div>
+    <div layout="column" layout-padding="1">
+        <div>
+            <md-list-container>
+                <md-list-item ng-show="loaded && !deployed" ng-click="goto('deploy')">Deploy Your MeDao</md-list-item>
+                <md-list-item ng-show="deployed" ng-click="goto('medao/' + currentAccount)" class="secondary-button-padding">
+                    <b>My Dao</b>
+                    <!--<md-button style="text-transform:none; font-size:12px; color:grey;" class="md-secondary" ng-click="goto('medao/' + currentAccount + '/admin')">settings</md-button>-->
+                </md-list-item>
+                <md-list-item ng-show="deployed" ng-click="goto('medao/' + currentAccount + '/finance')">- &nbsp&nbsp Finance</md-list-item>
+                <md-list-item ng-show="deployed" ng-click="goto('medao/' + currentAccount + '/congress')">- &nbsp&nbsp Congress</md-list-item>
+                <md-list-item ng-show="deployed" ng-click="goto('medao/' + currentAccount + '/clones')">- &nbsp&nbsp Clones (coming soon)</md-list-item>
+            </md-list-container>
+        </div>
+        <md-divider></md-divider>
+        <h5 style="margin:0px;">Browse MeDaos</h5>
+        <md-content>
+            <md-list-container>
+                <md-list-item data-ng-repeat="medao in medaos" ng-click="goto('medao/' + medao.ceo)">
+                    <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{medao.name}}</div>
+                </md-list-item>
+            </md-list-container>
+        </md-content>
+    </div>
+    <span flex></span>
     <footer></footer>
 </div>

@@ -85,7 +85,6 @@ function($scope, Web3Service, MeDao, MiniMeToken, Matriarch, Congress, IpfsServi
     });
     
     $scope.goto = function(url){
-        console.log(url);
         $location.url(url);
     };
     

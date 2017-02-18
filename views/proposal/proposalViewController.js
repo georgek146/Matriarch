@@ -8,7 +8,6 @@ function($scope,$location,MeDao,MiniMeToken,Web3Service,IpfsService,Matriarch,Co
     $scope.currentAccount = array[2].toLowerCase();
     
     $scope.goto = function(url) {
-        console.log(url);
         $location.url(url);
     };
     

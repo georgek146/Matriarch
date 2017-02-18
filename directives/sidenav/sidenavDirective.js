@@ -22,7 +22,6 @@ function($mdSidenav, $location, Web3Service, Matriarch, MiniMeToken, MeDao) {
             });
             
             $scope.goto = function(url){
-                console.log(url);
                 $location.url(url);
             };
             

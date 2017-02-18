@@ -55,7 +55,6 @@ function($location, Web3Service, IpfsService, MiniMeToken, Congress) {
             });
             
             $scope.goto = function(url) {
-                console.log(url);
                 $location.url(url);
             };
 		},
