@@ -107,7 +107,7 @@ function($scope,$location,Congress,MiniMeToken,Web3Service,IpfsService,MeDao,Mat
     });
     
     $scope.disabled = true;
-    $scope.$watch('proposal', function() {
+    setInterval(function() {
         console.log($scope.disabled);
         $scope.disabled = false;
         if($scope.proposal.action == null)
@@ -128,7 +128,7 @@ function($scope,$location,Congress,MiniMeToken,Web3Service,IpfsService,MeDao,Mat
             if(proposal.address == null)
                 $scope.disabled = true;
         }
-    });
+    }, 500);
     
     $scope.submitProposal = function(){
         $scope.disabled = true;
